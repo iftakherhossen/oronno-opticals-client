@@ -1,10 +1,14 @@
+import { Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import React from 'react';
 
 const Review = () => {
      return (
-          <div>
-               <h2>Review Our Products</h2>
-          </div>
+          <Box>
+               <Typography variant="h4" sx={{textAlign: 'center'}}>Review Our Products</Typography>
+
+               
+          </Box>
      );
 };
 

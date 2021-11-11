@@ -2,8 +2,8 @@ import { Grid, Typography, Button, Paper } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 
-const Product = ({ products }) => {
-    const { title, img, price } = products;
+const Product = ({ product, handleAddToCart }) => {
+    const { title, img, price } = product;
 
     return (
         <Box>
@@ -16,7 +16,7 @@ const Product = ({ products }) => {
                     <Typography variant="h6" gutterBottom component="div">
                         $ {price}
                     </Typography>
-                    <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', mt: 2, px: 3 }}>Add to Cart</Button>
+                    <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', mt: 2, px: 3 }} onClick={() => handleAddToCart(product)}>Add to Cart</Button>
                 </Paper>
             </Grid>
         </Box>

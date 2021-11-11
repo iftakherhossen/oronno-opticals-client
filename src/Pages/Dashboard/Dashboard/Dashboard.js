@@ -12,6 +12,7 @@ import MakeAdmin from '../MakeAdmin/MakeAdmin'
 import MyOrders from '../MyOrders/MyOrders';
 import Pay from '../Pay/Pay';
 import Review from '../Review/Review';
+import Cart from '../Cart/Cart';
 
 const drawerWidth = 240;
 
@@ -26,23 +27,40 @@ const Dashboard = props => {
     };
 
     const drawer = (
-        <div style={{ backgroundColor: '#282c34', height: '100%', border: 0 }}>
-            <Box sx={{mt: 6, mb: 3, textAlign: 'center'}}>
+        <div style={{ backgroundColor: '#282c34', height: '100%', border: 0, px: 'auto', textAlign: 'center' }}>
+            <Box sx={{mt: 8, mb: 3}}>
                 {
                     user?.photoURL ? <img src={user?.photoURL} alt={user.displayName} title={user?.displayName} className="avatar" /> : <AccountCircleIcon sx={{ fontSize: 90, color: '#ddd' }} title={user?.displayName} />
                 }
             </Box>
             <List>
-                <Link to={`${url}`} style={{ color: 'white', textDecoration: 'none' }}><Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1, my: 1 }}>My Orders</Button></Link>
-                <Link to={`${url}/pay`} style={{ color: 'white', textDecoration: 'none' }}><Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1 }}>Pay</Button></Link>
-                <Link to={`${url}/review`} style={{ color: 'white', textDecoration: 'none' }}><Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1 }}>Review</Button></Link>
+                <Link to={`${url}`} style={{ color: 'white', textDecoration: 'none' }}>
+                    <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1, mt: 1 }}>Cart</Button>
+                </Link>
+                <Link to={`${url}/myOrders`} style={{ color: 'white', textDecoration: 'none' }}>
+                    <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1, mx: 'auto' }}>My Orders</Button>
+                </Link>
+                <Link to={`${url}/pay`} style={{ color: 'white', textDecoration: 'none' }}>
+                    <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Payment</Button>
+                </Link>
+                <Link to={`${url}/review`} style={{ color: 'white', textDecoration: 'none' }}>
+                    <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Review Us</Button>
+                </Link>
                 {admin && <Box>
-                    <Link to={`${url}/makeAdmin`} style={{ color: 'white', textDecoration: 'none' }}><Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1, my: 1 }}>Make Admin</Button></Link>
-                    <Link to="/manageAllOrders" style={{ color: 'white', textDecoration: 'none' }}><Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1 }}>Manage All Orders</Button></Link>
-                    <Link to="/addProducts" style={{ color: 'white', textDecoration: 'none' }}><Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1 }}>Add Products</Button></Link>
-                    <Link to="/addProducts" style={{ color: 'white', textDecoration: 'none' }}><Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1 }}>Manage Products</Button></Link>
+                    <Link to={`${url}/makeAdmin`} style={{ color: 'white', textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1, my: 1 }}>Make Admin</Button>
+                    </Link>
+                    <Link to="/manageAllOrders" style={{ color: 'white', textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Manage All Orders</Button>
+                    </Link>
+                    <Link to="/addProducts" style={{ color: 'white', textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Add Products</Button>
+                    </Link>
+                    <Link to="/addProducts" style={{ color: 'white', textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Manage Products</Button>
+                    </Link>
                 </Box>}
-                <Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1, color: 'white', mt: 10 }} onClick={logOut}>Log Out</Button>
+                <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1, color: 'white', mt: 10 }} onClick={logOut}>Log Out</Button>
             </List>
         </div>
     );
@@ -116,7 +134,10 @@ const Dashboard = props => {
             >
                 <Toolbar />
                 <Switch>
-                    <Route exact path={{path}}>
+                    <Route exact path={path}>
+                        <Cart />
+                    </Route>
+                    <Route path={`${path}/cart`}>
                         <MyOrders />
                     </Route>
                     <Route path={`${path}/pay`}>

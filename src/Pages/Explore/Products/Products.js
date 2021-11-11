@@ -1,16 +1,39 @@
 import { Container, Typography, Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
+import useCart from '../../../hooks/useCart';
+import { addToDb } from '../../../utilities/fakedb';
 import Product from '../Product/Product';
 
 const Products = () => {
-    const [products, setProducts] = useState([]);
+    const [product, setProduct] = useState([]);
+    const [cart, setCart] = useCart();
 
     useEffect(() => {
         fetch('http://localhost:5000/products')
             .then(res => res.json())
-            .then(data => setProducts(data));
+            .then(data => setProduct(data));
     }, [])
+
+    const handleAddToCart = (product) => {
+        const key = product._id;
+
+        const exists = cart.find(pd => pd.key === key);
+        let newCart = [];
+        if (exists) {
+            const rest = cart.filter(pd => pd.key !== product._id);
+            exists.quantity = exists.quantity + 1;
+            newCart = [...rest, product];
+        }
+        else {
+            product.quantity = 1;
+            newCart = [...cart, key];
+        }
+        setCart(newCart);
+
+        // save to local storage (for now)
+        addToDb(key);
+    }
 
     return (
         <Box>
@@ -22,12 +45,13 @@ const Products = () => {
                     <Box sx={{ flexGrow: 1, pt: 5 }}>
                         <Grid container spacing={{ xs: 2, sm: 3, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} sx={{ pl: 1.5 }}>
                             {
-                                products.map(product => <Product
+                                product.map(product => <Product
                                     key={product._id}
-                                    products={product}
+                                    product={product}
+                                    handleAddToCart={handleAddToCart}
                                 />)
                             }
-                            <Box sx={{mx: 'auto', my: 4}}>
+                            <Box sx={{ mx: 'auto', my: 4 }}>
                                 <Typography variant="h6" sx={{ color: '#282c34' }}>More Coming Soon!!!</Typography>
                             </Box>
                         </Grid>
