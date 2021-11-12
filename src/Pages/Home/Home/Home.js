@@ -1,9 +1,10 @@
 import React from 'react';
 import Footer from '../../Shared/Footer/Footer';
 import Navigation from '../../Shared/Navigation/Navigation';
+import AboutUs from '../AboutUs/AboutUs';
 import Banner from '../Banner/Banner';
 import HomeProducts from '../HomeProducts/HomeProducts';
-import ShowReview from '../ShowReviews/ShowReviews';
+import ShowReviews from '../ShowReviews/ShowReviews';
 
 const Home = () => {
     return (
@@ -11,7 +12,8 @@ const Home = () => {
             <Navigation />
             <Banner />
             <HomeProducts />
-            <ShowReview />
+            <ShowReviews />
+            <AboutUs/>
             <Footer />
         </div>
     );

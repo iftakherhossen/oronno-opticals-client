@@ -18,7 +18,7 @@ const Explored = ({ products }) => {
                         <Typography variant="h5" gutterBottom component="div" sx={{my: 2}}>
                             $ {price}
                         </Typography>
-                        <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', px: 3 }}>Add to Cart</Button>
+                        <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', px: 3 }}>Buy Now</Button>
                     </Paper>
                 </Grid>
             </Box>

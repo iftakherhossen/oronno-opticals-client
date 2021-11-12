@@ -12,7 +12,7 @@ import MakeAdmin from '../MakeAdmin/MakeAdmin'
 import MyOrders from '../MyOrders/MyOrders';
 import Pay from '../Pay/Pay';
 import Review from '../Review/Review';
-import Cart from '../Cart/Cart';
+import ManageAllOrders from '../ManageAllOrders/ManageAllOrders';
 
 const drawerWidth = 240;
 
@@ -35,10 +35,7 @@ const Dashboard = props => {
             </Box>
             <List>
                 <Link to={`${url}`} style={{ color: 'white', textDecoration: 'none' }}>
-                    <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1, mt: 1 }}>Cart</Button>
-                </Link>
-                <Link to={`${url}/myOrders`} style={{ color: 'white', textDecoration: 'none' }}>
-                    <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1, mx: 'auto' }}>My Orders</Button>
+                    <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1, mt: 1 }}>My Orders</Button>
                 </Link>
                 <Link to={`${url}/pay`} style={{ color: 'white', textDecoration: 'none' }}>
                     <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Payment</Button>
@@ -135,9 +132,6 @@ const Dashboard = props => {
                 <Toolbar />
                 <Switch>
                     <Route exact path={path}>
-                        <Cart />
-                    </Route>
-                    <Route path={`${path}/cart`}>
                         <MyOrders />
                     </Route>
                     <Route path={`${path}/pay`}>
@@ -148,6 +142,9 @@ const Dashboard = props => {
                     </Route>
                     <Route path={`${path}/makeAdmin`}>
                         <MakeAdmin />
+                    </Route>
+                    <Route path={`${path}/manageAllOrders`}>
+                        <ManageAllOrders />
                     </Route>
                 </Switch>
             </Box>
