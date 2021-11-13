@@ -43,10 +43,10 @@ const Dashboard = props => {
                 <Link to={`${url}/review`} style={{ color: 'white', textDecoration: 'none' }}>
                     <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Review Us</Button>
                 </Link>
+                <Link to={`${url}/makeAdmin`} style={{ color: 'white', textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Make Admin</Button>
+                </Link>
                 {admin && <Box>
-                    <Link to={`${url}/makeAdmin`} style={{ color: 'white', textDecoration: 'none' }}>
-                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1, my: 1 }}>Make Admin</Button>
-                    </Link>
                     <Link to="/manageAllOrders" style={{ color: 'white', textDecoration: 'none' }}>
                         <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Manage All Orders</Button>
                     </Link>

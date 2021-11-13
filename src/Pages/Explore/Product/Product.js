@@ -8,7 +8,7 @@ const Product = ({ product, handleBuyNow }) => {
     return (
         <Box>
             <Grid item xs={12} sm={6} md={4}>
-                <Paper elevation={3} sx={{ py: 3, m: 3, width: 340, textAlign: 'center' }}>
+                <Paper elevation={3} sx={{ py: 3, m: 3, width: 320, textAlign: 'center' }}>
                     <img src={img} alt="product" className="cardImg" />
                     <Typography sx={{ color: '#282c34', fontWeight: 600 }} variant="h5" gutterBottom component="div">
                         {title}

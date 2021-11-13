@@ -29,6 +29,9 @@ const MyOrders = () => {
                               setMyOrder(remaining)
                          }
                     }
+                    else {
+                         setMyOrder(data);
+                    }
                })
      }
 
