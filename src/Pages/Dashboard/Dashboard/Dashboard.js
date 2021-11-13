@@ -39,7 +39,7 @@ const Dashboard = props => {
                 <Link to={`${url}`} style={{ color: 'white', textDecoration: 'none' }}>
                     <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>My Orders</Button>
                 </Link>
-                <Link to={`${url}/payment`} style={{ color: 'white', textDecoration: 'none' }}>
+                <Link to={`${url}/pay`} style={{ color: 'white', textDecoration: 'none' }}>
                     <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Payment</Button>
                 </Link>
                 <Link to={`${url}/review`} style={{ color: 'white', textDecoration: 'none' }}>
@@ -142,18 +142,18 @@ const Dashboard = props => {
                     <Route path={`${path}/review`}>
                         <Review />
                     </Route>
-                    <Route path={`${path}/makeAdmin`}>
+                    <AdminRoute path={`${path}/makeAdmin`}>
                         <MakeAdmin />
-                    </Route>
-                    <Route path={`${path}/manageAllOrders`}>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageAllOrders`}>
                         <ManageAllOrders />
-                    </Route>
-                    <Route path={`${path}/addProducts`}>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/addProducts`}>
                         <AddProducts />
-                    </Route>
-                    <Route path={`${path}/manageProducts`}>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageProducts`}>
                         <ManageProducts />
-                    </Route>
+                    </AdminRoute>
                 </Switch>
             </Box>
         </Box>

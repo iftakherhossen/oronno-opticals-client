@@ -38,10 +38,10 @@ const Products = () => {
         <Box>
             <Container>
                 <Box sx={{ textAlign: 'center', py: 3 }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', px: 3 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 3 }}>
                         <Box sx={{ textAlign: 'left' }}>
                             <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1 }}>Explore</Typography>
-                            <Typography variant="h6">Brand New Optical's & Sunglasses</Typography>
+                            <Typography variant="h6" sx={{ mb: 1 }}>Brand New Optical's & Sunglasses</Typography>
                         </Box>
                         <Box>
                             <Link to="/shipping" style={{ textDecoration: 'none' }}>

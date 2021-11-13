@@ -6,11 +6,13 @@ import useAuth from '../../../hooks/useAuth';
 import { clearTheCart, getStoredCart } from '../../../utilities/fakedb';
 import Footer from '../../Shared/Footer/Footer';
 import Navigation from '../../Shared/Navigation/Navigation';
+import { useHistory } from 'react-router';
 
 const Shipping = () => {
     const { user, isLoading, authError } = useAuth();
     const [orderSuccess, setOrderSuccess] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const history = useHistory();
 
     const onSubmit = data => {
         const savedCart = getStoredCart();
@@ -33,6 +35,7 @@ const Shipping = () => {
                     reset();
                 }
             })
+        history.push('/dashboard/myOrders')
     };
 
     return (

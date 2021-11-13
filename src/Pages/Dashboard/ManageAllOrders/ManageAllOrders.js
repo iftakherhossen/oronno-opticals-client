@@ -64,6 +64,7 @@ const ManageAllOrders = () => {
                                     <select>
                                         <option>{order.status}</option>
                                         <option>Shipped</option>
+                                        <option>Canceled</option>
                                     </select>
                                 </TableCell>
                                 <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>

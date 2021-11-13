@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 import HomeProduct from '../HomeProduct/HomeProduct';
 import useCart from '../../../hooks/useCart';
 import { addToDb } from '../../../utilities/fakedb';
+import { useHistory } from 'react-router';
 
 const HomeProducts = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useCart();
+    const history = useHistory();
 
     useEffect(() => {
         fetch('http://localhost:5000/limitedProducts')
@@ -32,6 +34,9 @@ const HomeProducts = () => {
         setCart(newCart);
         // save to local storage (for now)
         addToDb(key);
+
+        alert('Go to Explore to continue Shopping, Product added to the cart!');
+        history.push('/explore')
     }
 
     return (
