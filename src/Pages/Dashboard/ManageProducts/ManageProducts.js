@@ -13,23 +13,23 @@ const ManageProducts = () => {
     }, [])
 
     const handleRemove = id => {
-        // const url = `http://localhost:5000/products/${id}`
-        // fetch(url, {
-        //     method: 'DELETE'
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         const confirm = window.confirm('Are you sure? You wanna delete this product!')
+        const url = `http://localhost:5000/products/${id}`
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                const confirm = window.confirm('Are you sure? You wanna delete this product!')
 
-        //         if (confirm === true) {
-        //             if (data.deletedCount) {
-        //                 alert('Deleted Successfully!')
-        //                 const remaining = products.filter(order => order._id !== id);
-        //                 setProducts(remaining)
-        //             }
-        //         }
-        //     })
+                if (confirm === true) {
+                    if (data.deletedCount) {
+                        alert('Deleted Successfully!')
+                        const remaining = products.filter(order => order._id !== id);
+                        setProducts(remaining)
+                    }
+                }
+            })
         console.log(id)
     }
 

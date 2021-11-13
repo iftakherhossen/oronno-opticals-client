@@ -45,18 +45,18 @@ const AddProducts = () => {
                                     {errors.key && <span style={{ color: 'red' }}>This field is required</span>}
                                     <TextField
                                         placeholder="Product Name"
-                                        {...register("name", { required: true })}
+                                        {...register("title", { required: true })}
                                         variant="standard"
                                         sx={{ width: '100%', mb: 2 }}
                                     />
-                                    {errors.name && <span style={{ color: 'red' }}>This field is required</span>}
+                                    {errors.tile && <span style={{ color: 'red' }}>This field is required</span>}
                                     <TextField
                                         placeholder="Product Image Link"
-                                        {...register("imageLink", { required: true })}
+                                        {...register("img", { required: true })}
                                         variant="standard"
                                         sx={{ width: '100%', mb: 2 }}
                                     />
-                                    {errors.imageLink && <span style={{ color: 'red' }}>This field is required</span>}
+                                    {errors.img && <span style={{ color: 'red' }}>This field is required</span>}
                                     <TextField
                                         placeholder="Product Price"
                                         {...register("price", { required: true })}
@@ -74,14 +74,17 @@ const AddProducts = () => {
                                     <Button
                                         type="submit"
                                         variant="contained"
-                                        sx={{ my: 3 }}
+                                        sx={{ mt: 3}}
                                         className="customBgColor"
                                     >Add Product</Button>
                                 </form>}
                             </Box>
                             <Box>
                                 {isLoading && <CircularProgress />}
-                                {addProductSuccess && <Alert severity="success" sx={{ mt: 3, width: '100%', mx: 'auto', fontWeight: 'bold' }}>Product Added Successfully!</Alert>}
+                                {addProductSuccess && <Alert severity="success" sx={{ my: 3, width: '100%', mx: 'auto', fontWeight: 'bold' }}>Product Added Successfully!</Alert>}
+                            </Box>
+                            <Box sx={{textAlign: 'center', mb: 0}}>
+                                <Link to="/explore" className="text-white text-decoration-none"><Button className="customBgColor text-white">Explore The Products</Button></Link>
                             </Box>
                         </Grid>
                     </Grid>

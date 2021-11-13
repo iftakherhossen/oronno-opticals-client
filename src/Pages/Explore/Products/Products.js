@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, Button } from '@mui/material';
+import { Container, Typography, Grid, Button, Divider } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import useCart from '../../../hooks/useCart';
@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const Products = () => {
     const [product, setProduct] = useState([]);
     const [cart, setCart] = useCart();
-     
+
     useEffect(() => {
         fetch('http://localhost:5000/products')
             .then(res => res.json())
@@ -38,9 +38,18 @@ const Products = () => {
         <Box>
             <Container>
                 <Box sx={{ textAlign: 'center', py: 3 }}>
-                    <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1 }}>Explore</Typography>
-                    <Typography variant="h6">Brand New Optical's & Sunglasses</Typography>
-
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', px: 3 }}>
+                        <Box sx={{ textAlign: 'left' }}>
+                            <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1 }}>Explore</Typography>
+                            <Typography variant="h6">Brand New Optical's & Sunglasses</Typography>
+                        </Box>
+                        <Box>
+                            <Link to="/shipping" style={{ textDecoration: 'none' }}>
+                                <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', mt: 2, px: 3 }}>Proceed to Shipping</Button>
+                            </Link>
+                        </Box>
+                    </Box>
+                    <Divider />
                     <Box sx={{ flexGrow: 1, pt: 5 }}>
                         <Grid container spacing={{ xs: 2, sm: 3, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} sx={{ pl: 1.5 }}>
                             {
@@ -50,13 +59,11 @@ const Products = () => {
                                     handleBuyNow={() => handleBuyNow(product)}
                                 />)
                             }
-                            <Box sx={{ mx: 'auto', my: 4 }}>
-                                <Typography variant="h6" sx={{ color: '#282c34' }}>More Coming Soon!!!</Typography>
-                                <Link to="/shipping" style={{textDecoration: 'none'}}>
-                                    <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', mt: 2, px: 3 }}>Cart</Button>
-                                </Link>
-                            </Box>
                         </Grid>
+                        <Divider />
+                        <Box sx={{ mx: 'auto', my: 4 }}>
+                            <Typography variant="h6" sx={{ color: '#282c34' }}>More Coming Soon!!!</Typography>
+                        </Box>
                     </Box>
                 </Box>
             </Container>
