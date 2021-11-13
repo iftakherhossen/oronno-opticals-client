@@ -10,7 +10,7 @@ const Review = () => {
      const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
      const onSubmit = data => {
-          fetch('http://localhost:5000/reviews', {
+          fetch('https://boiling-spire-70151.herokuapp.com/reviews', {
                method: 'POST',
                headers: {
                     'content-type': 'application/json'

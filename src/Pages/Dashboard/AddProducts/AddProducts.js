@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CircularProgress,Container, TextField, Typography, Button, Alert, Grid, FormControl, Input, InputAdornment } from '@mui/material';
+import { CircularProgress, Container, TextField, Typography, Button, Alert, Grid, FormControl, Input, InputAdornment } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { Box } from '@mui/system';
 import useAuth from '../../../hooks/useAuth';
@@ -9,9 +9,9 @@ const AddProducts = () => {
     const { user, isLoading, authError } = useAuth();
     const [addProductSuccess, setAddProductSuccess] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    
+
     const onSubmit = data => {
-        fetch('http://localhost:5000/products', {
+        fetch('https://boiling-spire-70151.herokuapp.com/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -74,7 +74,7 @@ const AddProducts = () => {
                                     <Button
                                         type="submit"
                                         variant="contained"
-                                        sx={{ mt: 3}}
+                                        sx={{ mt: 3 }}
                                         className="customBgColor"
                                     >Add Product</Button>
                                 </form>}
@@ -83,7 +83,7 @@ const AddProducts = () => {
                                 {isLoading && <CircularProgress />}
                                 {addProductSuccess && <Alert severity="success" sx={{ my: 3, width: '100%', mx: 'auto', fontWeight: 'bold' }}>Product Added Successfully!</Alert>}
                             </Box>
-                            <Box sx={{textAlign: 'center', mb: 0}}>
+                            <Box sx={{ textAlign: 'center', mb: 0 }}>
                                 <Link to="/explore" className="text-white text-decoration-none"><Button className="customBgColor text-white">Explore The Products</Button></Link>
                             </Box>
                         </Grid>

@@ -13,7 +13,7 @@ const HomeProducts = () => {
     const history = useHistory();
 
     useEffect(() => {
-        fetch('http://localhost:5000/limitedProducts')
+        fetch('https://boiling-spire-70151.herokuapp.com/limitedProducts')
             .then(res => res.json())
             .then(data => setProducts(data));
     }, [])

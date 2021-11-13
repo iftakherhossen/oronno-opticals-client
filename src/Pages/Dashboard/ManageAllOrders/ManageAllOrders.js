@@ -1,17 +1,18 @@
 import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import EmailIcon from '@mui/icons-material/Email';
 
 const ManageAllOrders = () => {
     const [order, setOrder] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/orders')
+        fetch('https://boiling-spire-70151.herokuapp.com/orders')
             .then(res => res.json())
             .then(data => setOrder(data));
     }, [])
 
     const handleCancel = id => {
-        const url = `http://localhost:5000/orders/${id}`
+        const url = `https://boiling-spire-70151.herokuapp.com/orders/${id}`
         fetch(url, {
             method: 'DELETE'
         })
@@ -33,7 +34,7 @@ const ManageAllOrders = () => {
     return (
         <div>
             <h2>Manage All Orders</h2>
-            
+
             <TableContainer component={Paper}>
                 <Table sx={{ width: '100%' }} aria-label="simple table">
                     <TableHead>
@@ -51,12 +52,12 @@ const ManageAllOrders = () => {
                         {order.map((order) => (
                             <TableRow
                                 key={order.name}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 }}}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                     {order.name}
                                 </TableCell>
-                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>{order.email}</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}><a href={`${order.email}`}><EmailIcon /></a></TableCell>
                                 <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>{order.address}</TableCell>
                                 <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>{order._id}</TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>{Object.keys(order.order).length}</TableCell>

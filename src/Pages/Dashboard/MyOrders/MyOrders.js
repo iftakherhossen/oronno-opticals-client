@@ -7,15 +7,15 @@ import { Link } from 'react-router-dom';
 const MyOrders = () => {
      const [myOrder, setMyOrder] = useState([]);
      const { user } = useAuth();
-     
+
      useEffect(() => {
-          fetch(`http://localhost:5000/orders/${user.email}`)
+          fetch(`https://boiling-spire-70151.herokuapp.com/orders/${user.email}`)
                .then(res => res.json())
                .then(data => setMyOrder(data));
      }, [user.email])
 
      const handleCancel = id => {
-          const url = `http://localhost:5000/orders/${id}`
+          const url = `https://boiling-spire-70151.herokuapp.com/orders/${id}`
           fetch(url, {
                method: 'DELETE'
           })
@@ -79,7 +79,7 @@ const MyOrders = () => {
                     </Table>
                </TableContainer>
 
-               <Box sx={{mt: 10, textAlign: 'center'}}>
+               <Box sx={{ mt: 10, textAlign: 'center' }}>
                     <Link to="/explore" className="text-decoration-none text-white"><Button variant="contained" className="customBgColor">Shop More</Button></Link>
                </Box>
           </div>

@@ -11,7 +11,7 @@ const Products = () => {
     const [cart, setCart] = useCart();
 
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://boiling-spire-70151.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProduct(data));
     }, [])
