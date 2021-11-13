@@ -35,7 +35,7 @@ const Shipping = () => {
                     reset();
                 }
             })
-        history.push('/dashboard/myOrders')
+        history.push('/dashboard')
     };
 
     return (
