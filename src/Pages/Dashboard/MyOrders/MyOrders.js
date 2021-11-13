@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper, Button } from '@mui/material';
+import { Box } from '@mui/system';
+import { Link } from 'react-router-dom';
 
 const MyOrders = () => {
      const [myOrder, setMyOrder] = useState([]);
@@ -44,9 +46,9 @@ const MyOrders = () => {
                          <TableHead>
                               <TableRow>
                                    <TableCell>Name</TableCell>
-                                   <TableCell align="center">Email</TableCell>
-                                   <TableCell align="center">Address</TableCell>
-                                   <TableCell align="center">Order Id</TableCell>
+                                   <TableCell>Email</TableCell>
+                                   <TableCell>Address</TableCell>
+                                   <TableCell>Order Id</TableCell>
                                    <TableCell>Quantity</TableCell>
                                    <TableCell align="center">Status</TableCell>
                                    <TableCell align="center">Action</TableCell>
@@ -66,14 +68,20 @@ const MyOrders = () => {
                                         <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>{order._id}</TableCell>
                                         <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>{Object.keys(order.order).length}</TableCell>
                                         <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>{order.status}</TableCell>
-                                        <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                        {order.status === "Pending" ? <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                              <Button onClick={() => handleCancel(order._id)}>Cancel</Button>
-                                        </TableCell>
+                                        </TableCell> : <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                             <Button disabled>Cancel</Button>
+                                        </TableCell>}
                                    </TableRow>
                               ))}
                          </TableBody>
                     </Table>
                </TableContainer>
+
+               <Box sx={{mt: 10, textAlign: 'center'}}>
+                    <Link to="/explore" className="text-decoration-none text-white"><Button variant="contained" className="customBgColor">Shop More</Button></Link>
+               </Box>
           </div>
      );
 };

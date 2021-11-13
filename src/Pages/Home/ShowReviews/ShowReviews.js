@@ -20,7 +20,7 @@ const ShowReviews = () => {
                               <Typography variant="h4">What People Think About Us!</Typography>
                          </Box>
                          <Box>
-                              <Grid container spacing={{ xs: 0, md: 0 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                              <Grid container spacing={{ xs: 0, md: 0 }}>
                                    {
                                         reviews.map(reviews => <ShowReview
                                              key={reviews._id}
@@ -28,7 +28,6 @@ const ShowReviews = () => {
                                         />)
                                    }
                               </Grid>
-
                          </Box>
                     </Container>
                </Box>

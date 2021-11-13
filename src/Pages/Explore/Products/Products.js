@@ -52,7 +52,7 @@ const Products = () => {
                             }
                             <Box sx={{ mx: 'auto', my: 4 }}>
                                 <Typography variant="h6" sx={{ color: '#282c34' }}>More Coming Soon!!!</Typography>
-                                <Link to="/dashboard" style={{textDecoration: 'none'}}>
+                                <Link to="/shipping" style={{textDecoration: 'none'}}>
                                     <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', mt: 2, px: 3 }}>Cart</Button>
                                 </Link>
                             </Box>

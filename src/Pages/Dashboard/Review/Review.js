@@ -34,7 +34,7 @@ const Review = () => {
                     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                          <Grid item xs={12} sm={8} md={4} sx={{ mx: 'auto' }}>
                               <Box sx={{ textAlign: 'center', my: 4 }}>
-                                   {!isLoading && <form className="shipping-form" onSubmit={handleSubmit(onSubmit)}>
+                                   {!isLoading && <form onSubmit={handleSubmit(onSubmit)}>
                                         <TextField
                                              defaultValue={user.displayName}
                                              {...register("name")}
@@ -61,6 +61,9 @@ const Review = () => {
                                                   {...register("ratings", { required: true })}
                                                   variant="standard"
                                                   sx={{ width: '100%', mb: 2 }}
+                                                  InputProps={{ inputProps: { min: 0, max: 5 } }}
+                                                  type="number"
+                                                  placeholder="0 - 5"
                                                   startAdornment={<InputAdornment position="start">Rating</InputAdornment>}
                                              />
                                         </FormControl>
@@ -76,7 +79,6 @@ const Review = () => {
                               <Box>
                                    {isLoading && <CircularProgress />}
                                    {reviewSuccess && <Alert severity="success" sx={{ mt: 3, width: '100%', mx: 'auto', fontWeight: 'bold' }}>Thanks For the Review! <Link to="/home#reviews">See YourReview</Link></Alert>}
-                                   {authError && <Alert severity="error" sx={{ mt: 3, width: '100%', mx: 'auto', fontWeight: 'bold' }}>{authError}</Alert>}
                               </Box>
                          </Grid>
                     </Grid>
