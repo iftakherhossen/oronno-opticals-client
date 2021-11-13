@@ -17,7 +17,7 @@ const Banner = () => {
                     <Carousel.Caption className="carouselText">
                         <h5>MEN'S OPTICAL</h5>
                         <h1>Latest Summer Arrivals</h1>
-                        <Link to="/home">
+                        <Link to="/explore">
                             <Button className="border-0 customBgColor mt-4 px-3 fw-bold">Shop New Collection</Button>
                         </Link>
                     </Carousel.Caption>
@@ -32,7 +32,7 @@ const Banner = () => {
                     <Carousel.Caption className="carouselText">
                         <h5>WOMEN'S OPTICAL</h5>
                         <h1>New Arrivals</h1>
-                        <Link to="/home">
+                        <Link to="/explore">
                             <Button className="border-0 customBgColor mt-4 px-3 fw-bold">Shop New Collection</Button>
                         </Link>
                     </Carousel.Caption>
@@ -47,7 +47,7 @@ const Banner = () => {
                     <Carousel.Caption className="carouselText">
                         <h5>SUNGLASSES</h5>
                         <h1>Exclusive Sunglasses</h1>
-                        <Link to="/home">
+                        <Link to="/explore">
                             <Button className="border-0 customBgColor mt-4 px-3 fw-bold">Shop New Collection</Button>
                         </Link>
                     </Carousel.Caption>
