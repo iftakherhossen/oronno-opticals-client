@@ -36,13 +36,13 @@ const Navigation = () => {
                     {user?.email && <Link to="/dashboard" style={{ color: 'white', textDecoration: 'none' }}><Button color="inherit" sx={{ fontSize: 16 }}>Dashboard</Button></Link>}
                     {
                         user?.email ?
-                            <Box sx={{ width: 230, display: 'flex', justifyContent: 'between' }}>
+                            <Box sx={{ width: 250, display: 'flex', justifyContent: 'between' }}>
                                 <Button color="inherit" sx={{ ml: 2 }} onClick={logOut}><LogoutIcon sx={{ fontSize: 28 }} /></Button>
                                 {
                                     user?.photoURL ? <img src={user?.photoURL} alt={user.displayName} title={user?.displayName} className="nav-avatar" /> : <AccountCircleIcon sx={{ fontSize: 40 }} title={user?.displayName} />
                                 }
                                 {
-                                    user?.displayName && <Typography sx={{ fontSize: 20,my: 'auto', ml: 1 }}>{user.displayName}</Typography>
+                                    user?.displayName && <Typography sx={{ fontSize: 16, my: 'auto', ml: 1 }}>{user.displayName}</Typography>
                                 }
                             </Box>
                             :

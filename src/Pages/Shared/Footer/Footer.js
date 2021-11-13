@@ -8,7 +8,7 @@ const Footer = () => {
             <Container sx={{ pt: 8 }}>
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                        <Grid item xs={12} sm={6} md={3}>
+                        <Grid item xs={6} sm={6} md={3}>
                             <Typography variant="h5" sx={{ mb: 1 }}>London</Typography>
                             <Typography variant="body1">
                                 One Euston Square <br />
@@ -17,7 +17,7 @@ const Footer = () => {
                                 NW1 2FD <br />
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6} md={3}>
+                        <Grid item xs={6} sm={6} md={3}>
                             <Typography variant="h5" sx={{ mb: 1 }}>New York</Typography>
                             <Typography variant="body1">
                                 810 Broadway <br />
@@ -26,7 +26,7 @@ const Footer = () => {
                                 NY 10012 <br />
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6} md={3}>
+                        <Grid item xs={6} sm={6} md={3}>
                             <Typography variant="h5" sx={{ mb: 1 }}>Toronto</Typography>
                             <Typography variant="body1">
                                 2610 Buffalo <br />
@@ -35,7 +35,7 @@ const Footer = () => {
                                 TR 94103 <br />
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6} md={3}>
+                        <Grid item xs={6} sm={6} md={3}>
                             <Typography variant="h5" sx={{ mb: 1 }}>Subscribe</Typography>
                             <TextField
                                 id="standard-basic-email"

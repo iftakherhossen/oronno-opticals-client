@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 const Review = () => {
-     const { user, isLoading, authError } = useAuth();
+     const { user, isLoading } = useAuth();
      const [reviewSuccess, setReviewSuccess] = useState(false);
      const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -78,7 +78,7 @@ const Review = () => {
                               </Box>
                               <Box>
                                    {isLoading && <CircularProgress />}
-                                   {reviewSuccess && <Alert severity="success" sx={{ mt: 3, width: '100%', mx: 'auto', fontWeight: 'bold' }}>Thanks For the Review! <Link to="/home#reviews">See YourReview</Link></Alert>}
+                                   {reviewSuccess && <Alert severity="success" sx={{ mt: 3, width: '100%', mx: 'auto', fontWeight: 'bold' }}>Thanks For the Review! <HashLink to="/home#reviews">See YourReview</HashLink></Alert>}
                               </Box>
                          </Grid>
                     </Grid>

@@ -11,25 +11,24 @@ const MakeAdmin = () => {
         setEmail(e.target.value);
     }
 
-    const handleAdmin = e => {
+    const handleAdminSubmit = e => {
         const user = { email };
 
-        // fetch('http://localhost:5000/users/admin', {
-        //     method: 'PUT',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(user)
-        // })
-        //     .then(res => res.json())
-        //     .the(data => {
-        //         // if (data.modifiedCount) {
-        //         //     setSuccess(true);
-        //         // }
-        //         console.log(data)
-        //     });
+        fetch('http://localhost:5000/users/admin', {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    setSuccess(true);
+                }
+            });
 
-        e.preventDefault()
+        e.preventDefault(user)
     }
 
     return (
@@ -37,7 +36,7 @@ const MakeAdmin = () => {
             <Typography variant="h4" sx={{ fontWeight: 'bold', mt: 2 }}>Make an Admin</Typography>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={10} md={5} sx={{ mx: 'auto' }}>
-                    <form onSubmit={handleAdmin}>
+                    <form onSubmit={handleAdminSubmit}>
                         <TextField
                             id="standard-basic-email"
                             label="Enter Your Email"
@@ -47,8 +46,7 @@ const MakeAdmin = () => {
                             variant="standard"
                             sx={{ width: '100%', mt: 8, mb: 5 }} /><br />
                         <Button type="submit" variant="contained" sx={{ bgcolor: '#282c34', fontWeight: 'bold' }}>Make Admin</Button>
-                        {success && <Alert severity="success" sx={{ mt: 3, width: '50%', mx: 'auto', fontWeight: 'bold' }}>Made Admin successfully!</Alert>}
-                        {success && <Alert severity="success" sx={{ mt: 3, width: '50%', mx: 'auto', fontWeight: 'bold' }}>{user.email} is Admin Now</Alert>}
+                        {success && <Alert severity="success" sx={{ mt: 3, width: '100%', mx: 'auto', fontWeight: 'bold' }}>Made Admin successfully!</Alert>}
                     </form>
                 </Grid>
             </Grid>

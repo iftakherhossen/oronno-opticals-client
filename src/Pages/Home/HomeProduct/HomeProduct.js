@@ -2,7 +2,7 @@ import { Grid, Typography, Button, Paper } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 
-const Explored = ({ products }) => {
+const Explored = ({ products, handleBuyNow }) => {
     const { title, img, description, price } = products;
 
     return (
@@ -18,7 +18,7 @@ const Explored = ({ products }) => {
                         <Typography variant="h5" gutterBottom component="div" sx={{my: 2}}>
                             $ {price}
                         </Typography>
-                        <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', px: 3 }}>Buy Now</Button>
+                        <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', px: 3 }} onClick={handleBuyNow}>Buy Now</Button>
                     </Paper>
                 </Grid>
             </Box>

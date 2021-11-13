@@ -45,18 +45,20 @@ const Dashboard = props => {
                 <Link to={`${url}/review`} style={{ color: 'white', textDecoration: 'none' }}>
                     <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Review Us</Button>
                 </Link>
-                <Link to={`${url}/makeAdmin`} style={{ color: 'white', textDecoration: 'none' }}>
-                    <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Make Admin</Button>
-                </Link>
-                <Link to={`${url}/manageAllOrders`} style={{ color: 'white', textDecoration: 'none' }}>
-                    <Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1 }}>Manage All Orders</Button>
-                </Link>
-                <Link to={`${url}/addProducts`} style={{ color: 'white', textDecoration: 'none' }}>
-                    <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Add Products</Button>
-                </Link>
-                <Link to={`${url}/manageProducts`} style={{ color: 'white', textDecoration: 'none' }}>
-                    <Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1 }}>Manage Products</Button>
-                </Link>
+                {admin && <Box>
+                    <Link to={`${url}/makeAdmin`} style={{ color: 'white', textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Make Admin</Button>
+                    </Link>
+                    <Link to={`${url}/manageAllOrders`} style={{ color: 'white', textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1 }}>Manage All Orders</Button>
+                    </Link>
+                    <Link to={`${url}/addProducts`} style={{ color: 'white', textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Add Products</Button>
+                    </Link>
+                    <Link to={`${url}/manageProducts`} style={{ color: 'white', textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1 }}>Manage Products</Button>
+                    </Link>
+                </Box>}
                 <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1, color: 'white', mt: 5 }} onClick={logOut}>Log Out</Button>
             </List>
         </div>
