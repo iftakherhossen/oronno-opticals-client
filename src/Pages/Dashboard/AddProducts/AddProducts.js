@@ -42,35 +42,35 @@ const AddProducts = () => {
                                         variant="standard"
                                         sx={{ width: '100%', mb: 2 }}
                                     />
-                                    {errors.key && <span style={{ color: 'red' }}>This field is required</span>}
+                                    {errors.key && <span style={{ color: 'red' }}>Product Key is required</span>}
                                     <TextField
                                         placeholder="Product Name"
                                         {...register("title", { required: true })}
                                         variant="standard"
                                         sx={{ width: '100%', mb: 2 }}
                                     />
-                                    {errors.tile && <span style={{ color: 'red' }}>This field is required</span>}
+                                    {errors.tile && <span style={{ color: 'red' }}>Product Name is required</span>}
                                     <TextField
                                         placeholder="Product Image Link"
                                         {...register("img", { required: true })}
                                         variant="standard"
                                         sx={{ width: '100%', mb: 2 }}
                                     />
-                                    {errors.img && <span style={{ color: 'red' }}>This field is required</span>}
+                                    {errors.img && <span style={{ color: 'red' }}>Product Image is required</span>}
                                     <TextField
                                         placeholder="Product Price"
                                         {...register("price", { required: true })}
                                         variant="standard"
                                         sx={{ width: '100%', mb: 2 }}
                                     />
-                                    {errors.price && <span style={{ color: 'red' }}>This field is required</span>}
+                                    {errors.price && <span style={{ color: 'red' }}>Product Price is required</span>}
                                     <textarea
                                         placeholder="Product Description"
                                         {...register("description", { required: true })}
                                         variant="standard"
-                                        style={{ width: '100%', mb: 2, height: 100 }}
+                                        style={{ width: '100%', mb: 2, height: 100, border: 0, borderBottom: '1px solid black' }}
                                     ></textarea>
-                                    {errors.description && <span style={{ color: 'red' }}>This field is required</span>}
+                                    {errors.description && <span style={{ color: 'red' }}>Product Description is required</span>}
                                     <Button
                                         type="submit"
                                         variant="contained"
@@ -83,9 +83,9 @@ const AddProducts = () => {
                                 {isLoading && <CircularProgress />}
                                 {addProductSuccess && <Alert severity="success" sx={{ my: 3, width: '100%', mx: 'auto', fontWeight: 'bold' }}>Product Added Successfully!</Alert>}
                             </Box>
-                            <Box sx={{ textAlign: 'center', mb: 0 }}>
+                            {addProductSuccess && <Box sx={{ textAlign: 'center', mb: 0 }}>
                                 <Link to="/explore" className="text-white text-decoration-none"><Button className="customBgColor text-white">Explore The Products</Button></Link>
-                            </Box>
+                            </Box>}
                         </Grid>
                     </Grid>
                 </Box>

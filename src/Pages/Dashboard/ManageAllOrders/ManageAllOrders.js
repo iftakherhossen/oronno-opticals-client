@@ -1,6 +1,7 @@
-import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper, Button } from '@mui/material';
+import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper, Button, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import EmailIcon from '@mui/icons-material/Email';
+import { Box } from '@mui/system';
 
 const ManageAllOrders = () => {
     const [order, setOrder] = useState([]);
@@ -32,8 +33,8 @@ const ManageAllOrders = () => {
     }
 
     return (
-        <div>
-            <h2>Manage All Orders</h2>
+        <Box>
+            <Typography variant="h4" sx={{ mb: 2 }}>Manage All Orders - {order.length}</Typography>
 
             <TableContainer component={Paper}>
                 <Table sx={{ width: '100%' }} aria-label="simple table">
@@ -41,9 +42,10 @@ const ManageAllOrders = () => {
                         <TableRow>
                             <TableCell>Name</TableCell>
                             <TableCell align="center">Email</TableCell>
-                            <TableCell align="center">Address</TableCell>
-                            <TableCell align="center">Order Id</TableCell>
-                            <TableCell>Quantity</TableCell>
+                            <TableCell>Address</TableCell>
+                            <TableCell>Product</TableCell>
+                            <TableCell>Order Id</TableCell>
+                            <TableCell align="center">Quantity</TableCell>
                             <TableCell align="center">Status</TableCell>
                             <TableCell align="center">Action</TableCell>
                         </TableRow>
@@ -57,18 +59,25 @@ const ManageAllOrders = () => {
                                 <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                     {order.name}
                                 </TableCell>
-                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}><a href={`${order.email}`}><EmailIcon /></a></TableCell>
-                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>{order.address}</TableCell>
-                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>{order._id}</TableCell>
-                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>{Object.keys(order.order).length}</TableCell>
-                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    <select>
-                                        <option>{order.status}</option>
-                                        <option>Shipped</option>
-                                        <option>Canceled</option>
-                                    </select>
+                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                    <a href={`${order.email}`}><EmailIcon /></a>
                                 </TableCell>
-                                <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                    {order.address}
+                                </TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                    {order.title}
+                                </TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                    {order._id}
+                                </TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                    {order.quantity}
+                                </TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                    {order.status ? 'Done' : 'Pending'}
+                                </TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                     <Button onClick={() => handleCancel(order._id)}>Cancel</Button>
                                 </TableCell>
                             </TableRow>
@@ -76,7 +85,7 @@ const ManageAllOrders = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </div>
+        </Box>
     );
 };
 

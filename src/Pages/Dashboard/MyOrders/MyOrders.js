@@ -3,6 +3,7 @@ import useAuth from '../../../hooks/useAuth';
 import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper, Button } from '@mui/material';
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
+import EmailIcon from '@mui/icons-material/Email';
 
 const MyOrders = () => {
      const [myOrder, setMyOrder] = useState([]);
@@ -48,6 +49,7 @@ const MyOrders = () => {
                                    <TableCell>Name</TableCell>
                                    <TableCell>Email</TableCell>
                                    <TableCell>Address</TableCell>
+                                   <TableCell>Title</TableCell>
                                    <TableCell>Order Id</TableCell>
                                    <TableCell>Quantity</TableCell>
                                    <TableCell align="center">Status</TableCell>
@@ -63,16 +65,33 @@ const MyOrders = () => {
                                         <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                              {order.name}
                                         </TableCell>
-                                        <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>{order.email}</TableCell>
-                                        <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>{order.address}</TableCell>
-                                        <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>{order._id}</TableCell>
-                                        <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>{Object.keys(order.order).length}</TableCell>
-                                        <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>{order.status}</TableCell>
-                                        {order.status === "Pending" ? <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                             <Button onClick={() => handleCancel(order._id)}>Cancel</Button>
-                                        </TableCell> : <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                             <Button disabled>Cancel</Button>
-                                        </TableCell>}
+                                        <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                             <a href={`${order.email}`}><EmailIcon /></a>
+                                        </TableCell>
+                                        <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                             {order.address}
+                                        </TableCell>
+                                        <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                             {order.title}
+                                        </TableCell>
+                                        <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                             {order._id}
+                                        </TableCell>
+                                        <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                             {order.quantity}
+                                        </TableCell>
+                                        <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                             {order.status ? 'Done' : 'Pending'}
+                                        </TableCell>
+                                        {order.status ?
+                                             <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                                  <Button disabled>Cancel</Button>
+                                             </TableCell>
+                                             :
+                                             <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                                  <Button onClick={() => handleCancel(order._id)}>Cancel</Button>
+                                             </TableCell>
+                                        }
                                    </TableRow>
                               ))}
                          </TableBody>

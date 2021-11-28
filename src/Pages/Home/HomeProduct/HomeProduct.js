@@ -1,9 +1,14 @@
 import { Grid, Typography, Button, Paper } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useState } from 'react';
+import BookingModal from '../../Explore/BookingModal/BookingModal';
 
-const Explored = ({ products, handleBuyNow }) => {
-    const { title, img, description, price } = products;
+const Explored = ({ product, setOrderSuccess }) => {
+    const { title, img, description, price } = product;
+
+    const [openModal, setOpenModal] = useState(false);
+    const handleModalOpen = () => setOpenModal(true);
+    const handleModalClose = () => setOpenModal(false);
 
     return (
         <div>
@@ -18,9 +23,16 @@ const Explored = ({ products, handleBuyNow }) => {
                         <Typography variant="h5" gutterBottom component="div" sx={{my: 2}}>
                             $ {price}
                         </Typography>
-                        <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', px: 3 }} onClick={handleBuyNow}>Buy Now</Button>
+                        <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', px: 3 }} onClick={handleModalOpen}>Buy Now</Button>
                     </Paper>
                 </Grid>
+
+                <BookingModal
+                    product={product}
+                    openModal={openModal}
+                    handleModalClose={handleModalClose}
+                    setOrderSuccess={setOrderSuccess}
+                ></BookingModal>
             </Box>
         </div>
     );
