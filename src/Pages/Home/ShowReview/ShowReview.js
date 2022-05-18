@@ -1,6 +1,6 @@
 import { Card, CardContent, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import StarIcon from '@mui/icons-material/Star';
+import ReactStars from "react-rating-stars-component";
 import React from 'react';
 
 const ShowReview = ({ reviews }) => {
@@ -8,13 +8,21 @@ const ShowReview = ({ reviews }) => {
 
     return (
         <Box>
-            <Grid xs={12} sm={12} md={6}>
-                <Card sx={{ width: 520, m: 2, p: 2, textAlign: 'center', fontStyle: 'italic' }}>
+            <Grid item xs={12} sm={12} md={12}>
+                <Card sx={{ minWidth: 600, maxWidth: '100%', m: 2, p: 2, textAlign: 'center' }}>
                     <CardContent>
-                        <Typography variant="h6" sx={{ fontSize: 25 }}>“{review}”</Typography>
-                        <Typography variant="body1" sx={{ my: 1, fontWeight: 'bold' }}><StarIcon /> {ratings}</Typography>
-                        <Typography variant="subtitle1" sx={{ color: 'eee' }}>{name}</Typography>
-                        <Typography variant="caption" sx={{ color: 'eee' }}>{email}</Typography>
+                        <Typography variant="h6" sx={{ fontSize: 25, fontStyle: 'italic' }}>“{review}”</Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                            <ReactStars
+                                value={ratings}
+                                size={30}
+                                activeColor="#ffd700"
+                                edit={false}
+                                isHalf={true}
+                            />
+                        </Box>
+                        <Typography variant="subtitle1" sx={{ color: 'eee', fontSize: 17 }}>{name}</Typography>
+                        <Typography variant="caption" sx={{ color: 'eee', fontSize: 14 }}>{email}</Typography>
                     </CardContent>
                 </Card>
             </Grid>

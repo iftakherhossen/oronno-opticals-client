@@ -35,7 +35,23 @@
   border-radius: 100%;
   width: 40px;
 }
+
 .cardHover:hover {
-  box-shadow: 0 3px 6px;
-  background-color: #dde3d371 !important;
+  box-shadow: 0 3px 3px;
+}
+
+.navBtn {
+  margin: 0.5rem !important;
+  color: white !important;
+  display: block !important;
+  font-size: 16px !important;
+  letter-spacing: 1.5px !important;
+}
+
+.navBtn:hover {
+  color: white;
+}
+
+.name:hover {
+  color: white;
 }

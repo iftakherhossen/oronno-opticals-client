@@ -13,7 +13,7 @@ const Product = ({ product, setOrderSuccess }) => {
         <Box>
             <Grid item xs={12} sm={6} md={4}>
                 <Paper elevation={1} sx={{ py: 3, m: 3, width: 320, textAlign: 'center' }} className="cardHover">
-                    <img src={img} alt="product" className="cardImg" />
+                    <img src={img} alt="product" className="cardImg" draggable="false" />
                     <Typography sx={{ color: '#282c34', fontWeight: 600 }} variant="h5" gutterBottom component="div">
                         {title}
                     </Typography>

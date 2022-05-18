@@ -13,6 +13,7 @@ const Banner = () => {
                         className="d-block w-100"
                         src="https://i.ibb.co/2PT8Z5B/slider-1.jpg"
                         alt="First slide"
+                        draggable="false"
                     />
                     <Carousel.Caption className="carouselText">
                         <h5>MEN'S OPTICAL</h5>
@@ -27,6 +28,7 @@ const Banner = () => {
                         className="d-block w-100"
                         src="https://i.ibb.co/8532d2q/slider-2.jpg"
                         alt="Second slide"
+                        draggable="false"
                     />
 
                     <Carousel.Caption className="carouselText">
@@ -42,6 +44,7 @@ const Banner = () => {
                         className="d-block w-100"
                         src="https://i.ibb.co/xhLnbwM/slider-3.jpg"
                         alt="Third slide"
+                        draggable="false"
                     />
 
                     <Carousel.Caption className="carouselText">

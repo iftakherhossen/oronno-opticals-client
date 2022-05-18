@@ -32,6 +32,32 @@ const ManageAllOrders = () => {
             })
     }
 
+    const handleDone = (id) => {
+        const url = `https://boiling-spire-70151.herokuapp.com/orders/${id}`
+        fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify({
+                status: 'Done'
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                const confirm = window.confirm('Are you sure? You wanna mark this Order as Done!')
+
+                if (confirm === true) {
+                    if (data.modifiedCount) {
+                        alert('Marked as Done Successfully!')
+                        const remaining = order.filter(order => order._id !== id);
+                        setOrder(remaining)
+                    }
+                }
+            })
+    }
+
     return (
         <Box>
             <Typography variant="h4" sx={{ mb: 2 }}>Manage All Orders - {order.length}</Typography>
@@ -40,12 +66,14 @@ const ManageAllOrders = () => {
                 <Table sx={{ width: '100%' }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
+                            <TableCell>Date</TableCell>
                             <TableCell>Name</TableCell>
                             <TableCell align="center">Email</TableCell>
                             <TableCell>Address</TableCell>
                             <TableCell>Product</TableCell>
                             <TableCell>Order Id</TableCell>
                             <TableCell align="center">Quantity</TableCell>
+                            <TableCell align="center">Payment Status</TableCell>
                             <TableCell align="center">Status</TableCell>
                             <TableCell align="center">Action</TableCell>
                         </TableRow>
@@ -56,6 +84,9 @@ const ManageAllOrders = () => {
                                 key={order.name}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
+                                <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                    {order.date}
+                                </TableCell>
                                 <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                     {order.name}
                                 </TableCell>
@@ -75,7 +106,10 @@ const ManageAllOrders = () => {
                                     {order.quantity}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    {order.status ? 'Done' : 'Pending'}
+                                    {order.paymentStatus === true ? 'Paid' : 'Not Paid'}
+                                </TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                    <Button onClick={() => handleDone(order._id)}>Done</Button>
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                     <Button onClick={() => handleCancel(order._id)}>Cancel</Button>

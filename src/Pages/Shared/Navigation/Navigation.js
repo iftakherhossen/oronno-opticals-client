@@ -1,49 +1,161 @@
-import React from 'react';
-import { Box } from '@mui/system';
-import { Typography, Button, Tooltip, Zoom } from '@mui/material';
-import { Link } from 'react-router-dom';
-import useAuth from '../../../hooks/useAuth';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import { Link } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navigation = () => {
-    const { user, logOut } = useAuth();
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const { user, logOut } = useAuth();
 
-    return (
-        <Box sx={{ flexGrow: 1 }}>
-            <Navbar collapseOnSelect expand="lg" className="customBgColor text-white">
-                <Container>
-                    <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                        <Link to="/home" style={{ color: 'white', textDecoration: 'none' }}>Oronno Opticals</Link>
-                    </Typography>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="ms-auto">
-                            <Link to="/home" style={{ color: 'white', textDecoration: 'none' }}><Button color="inherit" sx={{ fontSize: 16, mr: 1 }}>Home</Button></Link>
-                            <Link to="/explore" style={{ color: 'white', textDecoration: 'none' }}><Button color="inherit" sx={{ fontSize: 16, mr: 1 }}>Explore</Button></Link>
-                        </Nav>
-                        <Nav>
-                            {user?.email && <Link to="/dashboard" style={{ color: 'white', textDecoration: 'none' }}><Button color="inherit" sx={{ fontSize: 16 }}>Dashboard</Button></Link>}
-                            {
-                                user?.email ?
-                                    <Box sx={{ width: 100, display: 'flex', justifyContent: 'between', px: 'auto' }}>
-                                        <Button color="inherit" onClick={logOut}><LogoutIcon sx={{ fontSize: 28 }} /></Button>
-                                        <Tooltip TransitionComponent={Zoom} title={user?.displayName}>
-                                            {
-                                                user?.photoURL ? <img src={user?.photoURL} alt={user.displayName} className="nav-avatar" /> : <AccountCircleIcon sx={{ fontSize: 40 }} />
-                                            }
-                                        </Tooltip>
-                                    </Box>
-                                    :
-                                    <Link to="/login" style={{ color: 'white', textDecoration: 'none' }}><Button color="inherit" sx={{ fontSize: 16 }}>Login</Button></Link>
-                            }
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar >
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  return (
+    <AppBar position="fixed" className="customBgColor text-white">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontWeight: 600,
+              fontSize: "1.7rem",
+              letterSpacing: ".1rem",
+              color: "white",
+              textDecoration: "none",
+            }}
+            className="name"
+          >
+            Oronno Opticals
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              color="inherit"
+              onClick={handleOpenNavMenu}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            >
+              <MenuItem>
+                <Link to="/" style={{ textDecoration: "none" }}>
+                  Home
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/explore" style={{ textDecoration: "none" }}>
+                  Explore
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/dashboard" style={{ textDecoration: "none" }}>
+                  Dashboard
+                </Link>
+              </MenuItem>
+            </Menu>
+          </Box>
+
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "flex", md: "none" },
+              fontWeight: 600,
+              fontSize: "1.7rem",
+              letterSpacing: ".1rem",
+              color: "white",
+              textDecoration: "none",
+            }}
+            className="name"
+          >
+            Oronno Opticals
+          </Typography>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button href="/" className="navBtn">
+              Home
+            </Button>
+            <Button href="/explore" className="navBtn">
+              Explore
+            </Button>
+            <Button href="/dashboard" className="navBtn">
+              Dashboard
+            </Button>
+          </Box>
+
+        <Box>
+            
         </Box>
-    );
+
+          {user.displayName && (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title={user.displayName}>
+                <IconButton sx={{ p: 0 }}>
+                  <Avatar alt={user.displayName} src={user.photoURL} />
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip title="Log Out">
+                <IconButton sx={{ ml: 1.5 }} onClick={logOut}>
+                  <LogoutIcon sx={{ color: "white" }} />
+                </IconButton>
+              </Tooltip>
+            </Box>
+          )}
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
 };
 
 export default Navigation;

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { CircularProgress, Container, TextField, Typography, Button, Alert, Grid, FormControl, Input, InputAdornment } from '@mui/material';
+import { CircularProgress, Container, TextField, Typography, Button, Alert, Grid } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { Box } from '@mui/system';
 import useAuth from '../../../hooks/useAuth';
 import { Link } from 'react-router-dom';
 
 const AddProducts = () => {
-    const { user, isLoading, authError } = useAuth();
+    const { isLoading } = useAuth();
     const [addProductSuccess, setAddProductSuccess] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -37,44 +37,44 @@ const AddProducts = () => {
                             <Box sx={{ textAlign: 'center', my: 4 }}>
                                 {!isLoading && <form onSubmit={handleSubmit(onSubmit)}>
                                     <TextField
-                                        placeholder="Product Key S = Sunglasses & O = Opticals"
-                                        {...register("key", { required: true })}
-                                        variant="standard"
-                                        sx={{ width: '100%', mb: 2 }}
-                                    />
-                                    {errors.key && <span style={{ color: 'red' }}>Product Key is required</span>}
-                                    <TextField
-                                        placeholder="Product Name"
+                                        label="Product Name"
                                         {...register("title", { required: true })}
                                         variant="standard"
                                         sx={{ width: '100%', mb: 2 }}
+                                        required
                                     />
                                     {errors.tile && <span style={{ color: 'red' }}>Product Name is required</span>}
                                     <TextField
-                                        placeholder="Product Image Link"
+                                        label="Product Image Link"
                                         {...register("img", { required: true })}
                                         variant="standard"
                                         sx={{ width: '100%', mb: 2 }}
+                                        required
                                     />
                                     {errors.img && <span style={{ color: 'red' }}>Product Image is required</span>}
                                     <TextField
-                                        placeholder="Product Price"
+                                        label="Product Price"
                                         {...register("price", { required: true })}
                                         variant="standard"
                                         sx={{ width: '100%', mb: 2 }}
+                                        required
                                     />
                                     {errors.price && <span style={{ color: 'red' }}>Product Price is required</span>}
-                                    <textarea
-                                        placeholder="Product Description"
-                                        {...register("description", { required: true })}
+                                    <TextField
+                                        id="standard-multiline-static"
+                                        label="Product Description"
+                                        multiline
+                                        rows={4}
                                         variant="standard"
-                                        style={{ width: '100%', mb: 2, height: 100, border: 0, borderBottom: '1px solid black' }}
-                                    ></textarea>
+                                        sx={{ width: '100%', mb: 2 }}
+                                        required
+                                    />
                                     {errors.description && <span style={{ color: 'red' }}>Product Description is required</span>}
                                     <Button
                                         type="submit"
                                         variant="contained"
                                         sx={{ mt: 3 }}
+                                        {...register("description", { required: true })}
                                         className="customBgColor"
                                     >Add Product</Button>
                                 </form>}

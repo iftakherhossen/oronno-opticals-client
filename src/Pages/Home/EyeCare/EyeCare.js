@@ -7,10 +7,10 @@ const EyeCare = () => {
         <div id="eyeCare">
             <Container>
                 <Grid container spacing={{ xs: 0, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }} sx={{py: 12}}>
-                    <Grid xs={12} sm={12} md={6} sx={{ m: 'auto', p: 3 }}>
-                        <img src="https://i.ibb.co/qD3QBXX/eye-care.jpg" alt="Banner" style={{width: '100%'}} />
+                    <Grid item xs={12} sm={12} md={6} sx={{ m: 'auto', p: 3 }}>
+                        <img src="https://i.ibb.co/qD3QBXX/eye-care.jpg" alt="Banner" draggable="false" style={{width: '100%'}} />
                     </Grid>
-                    <Grid xs={12} sm={12} md={6} sx={{ m: 'auto', p: 3 }}>
+                    <Grid item xs={12} sm={12} md={6} sx={{ m: 'auto', p: 3 }}>
                         <Box>
                             <Typography variant="h4">Get an Free Eye Care Test at our Shop</Typography>
                             <Typography paragraph sx={{my: 3}}>

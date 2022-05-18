@@ -1,6 +1,6 @@
 import { Typography, CssBaseline, AppBar, Button, Drawer, List, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -20,7 +20,7 @@ const drawerWidth = 250;
 
 const Dashboard = props => {
     const { window } = props;
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
     let { path, url } = useRouteMatch();
     const { user, admin, logOut } = useAuth();
 

@@ -24,6 +24,8 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess })
 
     const initialInfo = { name: user.displayName, email: user.email }
     const [orderInfo, setOrderInfo] = useState(initialInfo);
+    const today = new Date();
+    const date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
 
     const handleOnBlur = e => {
         const field = e.target.name;
@@ -37,7 +39,8 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess })
         const order = {
             ...orderInfo,
             title,
-            price
+            price,
+            date
         }
 
         // send data to the server
@@ -85,6 +88,7 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess })
                                 name="name"
                                 onBlur={handleOnBlur}
                                 sx={{ my: 2, width: '48%' }}
+                                readOnly
                             />
                             <TextField
                                 id="standard-size-normal"
@@ -93,6 +97,7 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess })
                                 name="email"
                                 onBlur={handleOnBlur}
                                 sx={{ my: 2, width: '48%' }}
+                                readOnly
                             />
                         </Box>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -144,10 +149,11 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess })
                         </Box>
                         <TextField
                             id="standard-size-normal"
-                            placeholder="Enter Your Address *"
+                            placeholder="Enter Your Address"
                             variant="standard"
                             name="address"
                             title="Address"
+                            type="text"
                             onBlur={handleOnBlur}
                             sx={{ my: 2, width: '100%' }}
                             required

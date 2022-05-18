@@ -42,64 +42,76 @@ const MyOrders = () => {
           <div>
                <h2>My Orders</h2>
 
-               <TableContainer component={Paper}>
-                    <Table sx={{ width: '100%' }} aria-label="simple table">
-                         <TableHead>
-                              <TableRow>
-                                   <TableCell>Name</TableCell>
-                                   <TableCell>Email</TableCell>
-                                   <TableCell>Address</TableCell>
-                                   <TableCell>Title</TableCell>
-                                   <TableCell>Order Id</TableCell>
-                                   <TableCell>Quantity</TableCell>
-                                   <TableCell align="center">Status</TableCell>
-                                   <TableCell align="center">Action</TableCell>
-                              </TableRow>
-                         </TableHead>
-                         <TableBody>
-                              {myOrder.map((order) => (
-                                   <TableRow
-                                        key={order.name}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                   >
-                                        <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                             {order.name}
-                                        </TableCell>
-                                        <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                             <a href={`${order.email}`}><EmailIcon /></a>
-                                        </TableCell>
-                                        <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                             {order.address}
-                                        </TableCell>
-                                        <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                             {order.title}
-                                        </TableCell>
-                                        <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                             {order._id}
-                                        </TableCell>
-                                        <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                             {order.quantity}
-                                        </TableCell>
-                                        <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                             {order.status ? 'Done' : 'Pending'}
-                                        </TableCell>
-                                        {order.status ?
-                                             <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                                  <Button disabled>Cancel</Button>
-                                             </TableCell>
-                                             :
-                                             <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                                  <Button onClick={() => handleCancel(order._id)}>Cancel</Button>
-                                             </TableCell>
-                                        }
+               {
+                    myOrder.length === 0 ? <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                         <img src="https://i.ibb.co/Q8ZFkm6/empty.png" alt="Not Found Any Orders" draggable={false} />
+                    </Box> : <TableContainer component={Paper}>
+                         <Table sx={{ width: '100%' }} aria-label="simple table">
+                              <TableHead>
+                                   <TableRow>
+                                        <TableCell>Date</TableCell>
+                                        <TableCell>Name</TableCell>
+                                        <TableCell align="center">Email</TableCell>
+                                        <TableCell align="center">Address</TableCell>
+                                        <TableCell align="center">Title</TableCell>
+                                        <TableCell align="center">Order Id</TableCell>
+                                        <TableCell align="center">Quantity</TableCell>
+                                        <TableCell align="center">Status</TableCell>
+                                        <TableCell align="center">Action</TableCell>
                                    </TableRow>
-                              ))}
-                         </TableBody>
-                    </Table>
-               </TableContainer>
+                              </TableHead>
+                              <TableBody>
+                                   {myOrder.map((order) => (
+                                        <TableRow
+                                             key={order.name}
+                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                             <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                                  {order.date}
+                                             </TableCell>
+                                             <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                                  {order.name}
+                                             </TableCell>
+                                             <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                                  <a href={`${order.email}`}><EmailIcon /></a>
+                                             </TableCell>
+                                             <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                                  {order.address}
+                                             </TableCell>
+                                             <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                                  {order.title}
+                                             </TableCell>
+                                             <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                                  {order._id}
+                                             </TableCell>
+                                             <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                                  {order.quantity ? order.quantity : 1}
+                                             </TableCell>
+                                             <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                                  {order.status ? 'Done' : 'Pending'}
+                                             </TableCell>
+                                             {order.status ?
+                                                  <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                                       <Button disabled>Cancel</Button>
+                                                  </TableCell>
+                                                  :
+                                                  <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                                       <Button onClick={() => handleCancel(order._id)}>Cancel</Button>
+                                                  </TableCell>
+                                             }
+                                        </TableRow>
+                                   ))}
+                              </TableBody>
+                         </Table>
+                    </TableContainer>
+               }
 
                <Box sx={{ mt: 10, textAlign: 'center' }}>
-                    <Link to="/explore" className="text-decoration-none text-white"><Button variant="contained" className="customBgColor">Shop More</Button></Link>
+                    <Link to="/explore" className="text-decoration-none text-white">
+                         <Button variant="contained" className="customBgColor">
+                              {myOrder.length === 0 ? 'Buy Now' : 'Shop More'}
+                         </Button>
+                    </Link>
                </Box>
           </div>
      );

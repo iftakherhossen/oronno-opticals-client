@@ -9,20 +9,32 @@ const HomeProducts = () => {
     const [orderSuccess, setOrderSuccess] = useState(false);
 
     useEffect(() => {
-        fetch('https://boiling-spire-70151.herokuapp.com/limitedProducts')
+        fetch('https://boiling-spire-70151.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProduct(data));
-    }, [])
+    }, []);
+    
+    const shuffleArray = array => {
+        let i = array.length - 1;
+        for (; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        return array;
+    }
 
+    const shuffledProducts = shuffleArray(product);
 
     return (
         <Box>
             <Container>
                 <Box sx={{ flexGrow: 1, py: 6, textAlign: 'center' }}>
-                    <Typography variant="h4" sx={{ my: 2 }}>Stay Safe & Buy Online</Typography>
+                    <Typography variant="h4" sx={{ mt: 2, mb: 3, fontWeight: 600 }}>Need Sunglasses or Opticals, We are here to serve you!</Typography>
                     <Grid container spacing={{ xs: 2, sm: 3, md: 3 }} sx={{ pl: 1.5, pt: 2 }}>
                         {
-                            product.map(product => <HomeProduct
+                            shuffledProducts.slice(0, 6).map(product => <HomeProduct
                                 key={product._id}
                                 product={product}
                                 setOrderSuccess={setOrderSuccess}
