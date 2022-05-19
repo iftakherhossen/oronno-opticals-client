@@ -14,6 +14,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { TextField } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Navigation = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -133,24 +135,39 @@ const Navigation = () => {
             </Button>
           </Box>
 
-        <Box>
-            
-        </Box>
+          <Box sx={{ display: "flex", alignItems: "space-between", mr: 6, }} >
+            <form>
+              <TextField
+                id="standard-search"
+                variant="standard"
+                placeholder="Search Opticals"
+                sx={{ color: 'white', mr: 1 }}
+                type="search"
+                size="small"
+              />
+              <IconButton>
+                <SearchIcon sx={{color: 'white'}} />
+              </IconButton>
+            </form>
+          </Box>
 
-          {user.displayName && (
+          {user.displayName ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title={user.displayName}>
                 <IconButton sx={{ p: 0 }}>
                   <Avatar alt={user.displayName} src={user.photoURL} />
                 </IconButton>
               </Tooltip>
-
               <Tooltip title="Log Out">
                 <IconButton sx={{ ml: 1.5 }} onClick={logOut}>
                   <LogoutIcon sx={{ color: "white" }} />
                 </IconButton>
               </Tooltip>
             </Box>
+          ) : (
+            <Button href="/login" className="navBtn">
+              Login
+            </Button>
           )}
         </Toolbar>
       </Container>

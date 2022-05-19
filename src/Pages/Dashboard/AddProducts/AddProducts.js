@@ -67,6 +67,7 @@ const AddProducts = () => {
                                         rows={4}
                                         variant="standard"
                                         sx={{ width: '100%', mb: 2 }}
+                                        {...register("description", { required: true })}
                                         required
                                     />
                                     {errors.description && <span style={{ color: 'red' }}>Product Description is required</span>}
@@ -74,7 +75,6 @@ const AddProducts = () => {
                                         type="submit"
                                         variant="contained"
                                         sx={{ mt: 3 }}
-                                        {...register("description", { required: true })}
                                         className="customBgColor"
                                     >Add Product</Button>
                                 </form>}

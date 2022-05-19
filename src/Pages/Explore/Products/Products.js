@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, Button, Divider, Snackbar, Alert } from '@mui/material';
+import { Container, Typography, Grid, Divider } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import Product from '../Product/Product';
@@ -40,10 +40,6 @@ const Products = () => {
                         </Box>
                     </Box>
                 </Box>
-
-                {orderSuccess && <Alert  severity="success" sx={{ width: '100%' }}>
-                        Your Order is Under Processing! Check dashboard to get updates!
-                </Alert>}
             </Container>
         </Box>
     );

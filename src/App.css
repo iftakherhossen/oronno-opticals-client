@@ -55,3 +55,7 @@
 .name:hover {
   color: white;
 }
+
+#standard-search {
+  color: white !important;
+}

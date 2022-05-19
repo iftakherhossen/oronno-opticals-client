@@ -62,7 +62,7 @@ const Footer = () => {
                             <a href="tel:016600" className="text-black"><PhoneIcon sx={{ fontSize: 25 }} /></a>
                         </Box>
                         <Divider sx={{ mb: 2 }} />
-                        <Typography variant="subtitle1" sx={{color: '#aaa'}}>© Oronno Opticals 2022, Iftakher Hossen, a Programming Hero initiative.</Typography>
+                        <Typography variant="subtitle1" sx={{color: '#aaa'}}>© Oronno Opticals 2022, <a href="https://iftakher-hossen.vercel.app/" target="_blank" rel="noreferrer" style={{color: '#aaa', textDecoration: 'none'}}>Iftakher Hossen</a>, a Programming Hero initiative.</Typography>
                     </Box>
                 </Box>
             </Container>

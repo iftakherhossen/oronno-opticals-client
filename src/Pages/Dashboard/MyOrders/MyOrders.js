@@ -4,6 +4,7 @@ import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
 import EmailIcon from '@mui/icons-material/Email';
+import Swal from 'sweetalert2';
 
 const MyOrders = () => {
      const [myOrder, setMyOrder] = useState([]);
@@ -22,19 +23,36 @@ const MyOrders = () => {
           })
                .then(res => res.json())
                .then(data => {
-                    console.log(data);
-                    const confirm = window.confirm('Are you sure? You wanna cancel this Order!')
-
-                    if (confirm === true) {
-                         if (data.deletedCount) {
-                              alert('Deleted Successfully!')
-                              const remaining = myOrder.filter(order => order._id !== id);
-                              setMyOrder(remaining)
+                    Swal.fire({
+                         title: 'Are you sure?',
+                         text: "You won't be able to revert this!",
+                         icon: 'warning',
+                         showCancelButton: true,
+                         confirmButtonColor: '#3085d6',
+                         cancelButtonColor: '#d33',
+                         confirmButtonText: 'Yes, delete it!',
+                         reverseButtons: true
+                       }).then((result) => {
+                         if (result.isConfirmed) {
+                           Swal.fire(
+                             'Deleted!',
+                             'Order has been deleted.',
+                             'success'
+                           )
+                             if (data.deletedCount) {
+                                 const remaining = myOrder.filter(order => order._id !== id);
+                                 setMyOrder(remaining)
+                             }
                          }
-                    }
-                    else {
-                         setMyOrder(data);
-                    }
+                         else if (result.dismiss === Swal.DismissReason.cancel) {
+                             Swal.fire(
+                                 'Cancelled',
+                                 'Your order is safe :)',
+                                 'error'
+                             )
+                             setMyOrder(myOrder);
+                         }
+                       })
                })
      }
 
@@ -63,7 +81,7 @@ const MyOrders = () => {
                               <TableBody>
                                    {myOrder.map((order) => (
                                         <TableRow
-                                             key={order.name}
+                                             key={order._id}
                                              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                              <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
@@ -75,7 +93,7 @@ const MyOrders = () => {
                                              <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                                   <a href={`${order.email}`}><EmailIcon /></a>
                                              </TableCell>
-                                             <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                             <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16, textTransform: 'capitalize' }}>
                                                   {order.address}
                                              </TableCell>
                                              <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>

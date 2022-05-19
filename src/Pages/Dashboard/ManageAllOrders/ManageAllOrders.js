@@ -2,6 +2,7 @@ import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper
 import React, { useEffect, useState } from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import { Box } from '@mui/system';
+import Swal from 'sweetalert2';
 
 const ManageAllOrders = () => {
     const [order, setOrder] = useState([]);
@@ -19,16 +20,35 @@ const ManageAllOrders = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                const confirm = window.confirm('Are you sure? You wanna cancel this Order!')
-
-                if (confirm === true) {
-                    if (data.deletedCount) {
-                        alert('Deleted Successfully!')
-                        const remaining = order.filter(order => order._id !== id);
-                        setOrder(remaining)
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                    reverseButtons: true
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      Swal.fire(
+                        'Deleted!',
+                        'Order has been deleted.',
+                        'success'
+                      )
+                        if (data.deletedCount) {
+                            const remaining = order.filter(order => order._id !== id);
+                            setOrder(remaining)
+                        }
                     }
-                }
+                    else if (result.dismiss === Swal.DismissReason.cancel) {
+                        Swal.fire(
+                            'Cancelled',
+                            'Your order is safe :)',
+                            'error'
+                        )
+                    }
+                  })
             })
     }
 
@@ -45,16 +65,27 @@ const ManageAllOrders = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                const confirm = window.confirm('Are you sure? You wanna mark this Order as Done!')
-
-                if (confirm === true) {
-                    if (data.modifiedCount) {
-                        alert('Marked as Done Successfully!')
-                        const remaining = order.filter(order => order._id !== id);
-                        setOrder(remaining)
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, mark as done!'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      Swal.fire(
+                        'Done!',
+                        'Order marked as done!',
+                        'success'
+                      )
+                        if (data.deletedCount) {
+                            const remaining = order.filter(order => order._id !== id);
+                            setOrder(remaining)
+                        }
                     }
-                }
+                  })
             })
     }
 
@@ -81,7 +112,7 @@ const ManageAllOrders = () => {
                     <TableBody>
                         {order.map((order) => (
                             <TableRow
-                                key={order.name}
+                                key={order._id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
@@ -93,7 +124,7 @@ const ManageAllOrders = () => {
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                     <a href={`${order.email}`}><EmailIcon /></a>
                                 </TableCell>
-                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16, textTransform: 'capitalize' }}>
                                     {order.address}
                                 </TableCell>
                                 <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
@@ -109,10 +140,10 @@ const ManageAllOrders = () => {
                                     {order.paymentStatus === true ? 'Paid' : 'Not Paid'}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    <Button onClick={() => handleDone(order._id)}>Done</Button>
+                                    {order.status ? <Button disabled sx={{bgcolor: '#eee'}}>Done</Button> : <Button onClick={() => handleDone(order._id)}>Done</Button>}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    <Button onClick={() => handleCancel(order._id)}>Cancel</Button>
+                                    {order.status ? <Button disabled sx={{bgcolor: '#eee'}}>Cancel</Button> : <Button onClick={() => handleCancel(order._id)}>Cancel</Button>}
                                 </TableCell>
                             </TableRow>
                         ))}

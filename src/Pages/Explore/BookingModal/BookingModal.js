@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import TextField from '@mui/material/TextField';
 import useAuth from '../../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const style = {
     position: 'absolute',
@@ -56,7 +57,11 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess })
                 if (data.insertedId) {
                     setOrderSuccess(true);
                     handleModalClose();
-                    alert('Your Order is under processing. Check Dashboard to get updates!');
+                    Swal.fire(
+                        'Order Placed!',
+                        'Order has been placed successfully! Wait for the confirmation email.',
+                        'success'
+                      )
                 }
             });
 
@@ -77,88 +82,98 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess })
             >
                 <Fade in={openModal}>
                     <Box sx={style}>
-                        <Typography id="transition-modal-title" variant="h5" component="h2" className="customColor" sx={{ fontWeight: 'bold', textDecoration: 'underline' }}>
+                        <Typography id="transition-modal-title" variant="h5" component="h2" className="customColor" sx={{ fontWeight: 'bold', textDecoration: 'underline', mb: 1 }}>
                             {title}
                         </Typography>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <TextField
-                                id="standard-size-normal"
-                                defaultValue={user.displayName}
-                                variant="standard"
-                                name="name"
-                                onBlur={handleOnBlur}
-                                sx={{ my: 2, width: '48%' }}
-                                readOnly
-                            />
-                            <TextField
-                                id="standard-size-normal"
-                                defaultValue={user.email}
-                                variant="standard"
-                                name="email"
-                                onBlur={handleOnBlur}
-                                sx={{ my: 2, width: '48%' }}
-                                readOnly
-                            />
-                        </Box>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <TextField
-                                id="standard-size-normal"
-                                defaultValue="+88"
-                                variant="standard"
-                                name="phone"
-                                title="Phone Number"
-                                onBlur={handleOnBlur}
-                                sx={{ my: 2, width: '48%' }}
-                                required
-                            />
-                            <TextField
-                                id="standard-size-option"
-                                defaultValue="Cash on Delivery"
-                                variant="standard"
-                                name="paymentMethod"
-                                title="Payment Method"
-                                onBlur={handleOnBlur}
-                                sx={{ my: 2, width: '47%' }}
-                                readOnly
-                            />
-                        </Box>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <FormControl variant="standard">
-                                <Input
-                                    id="standard-adornment-amount"
-                                    defaultValue="1"
-                                    type="number"
-                                    name="quantity"
-                                    startAdornment={<InputAdornment position="start">Quantity</InputAdornment>}
+                        <form onSubmit={handleSubmit}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <TextField
+                                    id="standard-size-normal"
+                                    label="Name"
+                                    type="text"
+                                    value={user.displayName}
+                                    variant="standard"
+                                    name="name"
                                     onBlur={handleOnBlur}
-                                    title="Quantity"
-                                    sx={{ my: 2, width: '91%' }}
+                                    sx={{ my: 2, width: '48%' }}
+                                    readOnly
+                                    required
                                 />
-                            </FormControl>
-                            <FormControl variant="standard">
-                                <Input
-                                    id="standard-adornment-amount"
-                                    value={price}
-                                    inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-                                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                                    endAdornment={<InputAdornment position="end">x1</InputAdornment>}
-                                    sx={{ my: 2, width: '100%' }}
+                                <TextField
+                                    id="standard-size-normal"
+                                    label="Email"
+                                    type="email"
+                                    value={user.email}
+                                    variant="standard"
+                                    name="email"
+                                    onBlur={handleOnBlur}
+                                    sx={{ my: 2, width: '48%' }}
+                                    readOnly
+                                    required
+                                />
+                            </Box>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <TextField
+                                    id="standard-size-normal"
+                                    variant="standard"
+                                    label="Phone"
+                                    name="phone"
+                                    type="text"
+                                    title="Phone Number"
+                                    onBlur={handleOnBlur}
+                                    sx={{ my: 2, width: '48%' }}
+                                    required
+                                />
+                                <TextField
+                                    id="standard-size-option"
+                                    defaultValue="Cash on Delivery"
+                                    variant="standard"
+                                    name="paymentMethod"
+                                    title="Payment Method"
+                                    label="Payment Method"
+                                    onBlur={handleOnBlur}
+                                    sx={{ my: 2, width: '47%' }}
                                     readOnly
                                 />
-                            </FormControl>
-                        </Box>
-                        <TextField
-                            id="standard-size-normal"
-                            placeholder="Enter Your Address"
-                            variant="standard"
-                            name="address"
-                            title="Address"
-                            type="text"
-                            onBlur={handleOnBlur}
-                            sx={{ my: 2, width: '100%' }}
-                            required
-                        />
-                        <Button variant="contained" sx={{ fontWeight: 'bold', mt: 2 }} onClick={handleSubmit} className="customBgColor">Submit</Button>
+                            </Box>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <FormControl variant="standard">
+                                    <Input
+                                        id="standard-adornment-amount"
+                                        defaultValue="1"
+                                        type="number"
+                                        name="quantity"
+                                        startAdornment={<InputAdornment position="start">Quantity</InputAdornment>}
+                                        onBlur={handleOnBlur}
+                                        title="Quantity"
+                                        sx={{ my: 2, width: '91%' }}
+                                    />
+                                </FormControl>
+                                <FormControl variant="standard">
+                                    <Input
+                                        id="standard-adornment-amount"
+                                        value={price}
+                                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                                        startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                                        endAdornment={<InputAdornment position="end">x1</InputAdornment>}
+                                        sx={{ my: 2, width: '100%' }}
+                                        readOnly
+                                    />
+                                </FormControl>
+                            </Box>
+                            <TextField
+                                id="standard-size-normal"
+                                label="Address"
+                                variant="standard"
+                                name="address"
+                                title="Address"
+                                type="text"
+                                onBlur={handleOnBlur}
+                                sx={{ my: 2, width: '100%' }}
+                                required
+                            />
+                            <Button variant="contained" type="submit" sx={{ fontWeight: 'bold', mt: 2 }} className="customBgColor">Submit</Button>
+                        </form>
                     </Box>
                 </Fade>
             </Modal>
