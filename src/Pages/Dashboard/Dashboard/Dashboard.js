@@ -35,30 +35,32 @@ const Dashboard = props => {
                     user?.photoURL ? <img src={user?.photoURL} alt={user.displayName} title={user?.displayName} className="avatar" /> : <AccountCircleIcon sx={{ fontSize: 90, color: '#ddd' }} title={user?.displayName} />
                 }
             </Box>
-            <List>
-                <Link to={`${url}`} style={{ color: 'white', textDecoration: 'none' }}>
-                    <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>My Orders</Button>
-                </Link>
-                <Link to={`${url}/pay`} style={{ color: 'white', textDecoration: 'none' }}>
-                    <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Payment</Button>
-                </Link>
-                <Link to={`${url}/review`} style={{ color: 'white', textDecoration: 'none' }}>
-                    <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Review Us</Button>
-                </Link>
-                {admin && <Box>
-                    <Link to={`${url}/makeAdmin`} style={{ color: 'white', textDecoration: 'none' }}>
-                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Make Admin</Button>
+            <List sx={{ minHeight: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Box>
+                    <Link to={`${url}`} style={{ color: 'white', textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>My Orders</Button>
                     </Link>
-                    <Link to={`${url}/manageAllOrders`} style={{ color: 'white', textDecoration: 'none' }}>
-                        <Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1 }}>Manage All Orders</Button>
+                    <Link to={`${url}/pay`} style={{ color: 'white', textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Payment</Button>
                     </Link>
-                    <Link to={`${url}/addProducts`} style={{ color: 'white', textDecoration: 'none' }}>
-                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Add Products</Button>
+                    <Link to={`${url}/review`} style={{ color: 'white', textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Review Us</Button>
                     </Link>
-                    <Link to={`${url}/manageProducts`} style={{ color: 'white', textDecoration: 'none' }}>
-                        <Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1 }}>Manage Products</Button>
-                    </Link>
-                </Box>}
+                    {admin && <Box>
+                        <Link to={`${url}/makeAdmin`} style={{ color: 'white', textDecoration: 'none' }}>
+                            <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Make Admin</Button>
+                        </Link>
+                        <Link to={`${url}/manageAllOrders`} style={{ color: 'white', textDecoration: 'none' }}>
+                            <Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1 }}>Manage All Orders</Button>
+                        </Link>
+                        <Link to={`${url}/addProducts`} style={{ color: 'white', textDecoration: 'none' }}>
+                            <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Add Products</Button>
+                        </Link>
+                        <Link to={`${url}/manageProducts`} style={{ color: 'white', textDecoration: 'none' }}>
+                            <Button color="inherit" sx={{ fontSize: 18, width: '100%', py: 1 }}>Manage Products</Button>
+                        </Link>
+                    </Box>}
+                </Box>
                 <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1, color: 'white', mt: 5 }} onClick={logOut}>Log Out</Button>
             </List>
         </div>

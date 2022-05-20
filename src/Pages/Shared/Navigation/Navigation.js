@@ -124,29 +124,29 @@ const Navigation = () => {
               alignItems: "center",
             }}
           >
-            <Button href="/" className="navBtn">
-              Home
-            </Button>
-            <Button href="/explore" className="navBtn">
-              Explore
-            </Button>
-            <Button href="/dashboard" className="navBtn">
-              Dashboard
-            </Button>
+            <Link to="/" style={{textDecoration: 'none'}}>
+              <Button className="navBtn">Home</Button>
+            </Link>
+            <Link to="/explore" style={{textDecoration: 'none'}}>
+              <Button className="navBtn">Explore</Button>
+            </Link>
+            <Link to="/dashboard" style={{textDecoration: 'none'}}>
+              <Button className="navBtn">Dashboard</Button>
+            </Link>
           </Box>
 
-          <Box sx={{ display: "flex", alignItems: "space-between", mr: 6, }} >
+          <Box sx={{ display: "flex", alignItems: "space-between", mr: 6 }}>
             <form>
               <TextField
                 id="standard-search"
                 variant="standard"
                 placeholder="Search Opticals"
-                sx={{ color: 'white', mr: 1 }}
+                sx={{ color: "white", mr: 1 }}
                 type="search"
                 size="small"
               />
               <IconButton>
-                <SearchIcon sx={{color: 'white'}} />
+                <SearchIcon sx={{ color: "white" }} />
               </IconButton>
             </form>
           </Box>

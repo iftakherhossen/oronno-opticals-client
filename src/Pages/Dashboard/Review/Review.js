@@ -28,7 +28,7 @@ const Review = () => {
 
      return (
           <Box>
-               <Typography variant="h4" sx={{ textAlign: 'center' }}>Review Our Products</Typography>
+               <Typography variant="h4" sx={{ textAlign: 'center', my: 1 }}>Review Our Products</Typography>
 
                <Box>
                     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -36,35 +36,40 @@ const Review = () => {
                               <Box sx={{ textAlign: 'center', my: 4 }}>
                                    {!isLoading && <form onSubmit={handleSubmit(onSubmit)}>
                                         <TextField
-                                             defaultValue={user.displayName}
+                                             value={user.displayName}
                                              {...register("name")}
                                              variant="standard"
                                              sx={{ width: '100%', mb: 2 }}
+                                             required
                                         />
                                         <TextField
-                                             defaultValue={user.email}
+                                             value={user.email}
                                              {...register("email", { required: true })}
                                              variant="standard"
                                              sx={{ width: '100%', mb: 2 }}
+                                             required
                                         />
                                         {errors.email && <span style={{ color: 'red' }}>This field is required</span>}
-                                        <textarea
+                                        <TextField
                                              placeholder="Write Your Opinion!"
-                                             defaultValue=""
                                              {...register("review", { required: true })}
                                              variant="standard"
-                                             style={{ width: '100%', mb: 2, height: 100 }}
-                                        ></textarea>
+                                             style={{ width: '100%' }}
+                                             multiline
+                                             rows={4}
+                                             required
+                                        />
                                         {errors.review && <span style={{ color: 'red' }}>This field is required</span>}
                                         <FormControl sx={{ width: 1 }} variant="standard">
                                              <Input
                                                   {...register("ratings", { required: true })}
                                                   variant="standard"
-                                                  sx={{ width: '100%', mb: 2 }}
+                                                  sx={{ width: '100%', my: 2 }}
                                                   InputProps={{ inputProps: { min: 0, max: 5 } }}
                                                   type="number"
                                                   placeholder="0 - 5"
                                                   startAdornment={<InputAdornment position="start">Rating</InputAdornment>}
+                                                  required
                                              />
                                         </FormControl>
                                         {errors.ratings && <span style={{ color: 'red' }}>This field is required</span>}<br />

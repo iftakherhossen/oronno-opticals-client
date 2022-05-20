@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import BookingModal from '../BookingModal/BookingModal';
 
 const Product = ({ product, setOrderSuccess }) => {
-    const { title, img, price } = product;
+    const { title, img, price, stock } = product;
     const [openModal, setOpenModal] = useState(false);
     const handleModalOpen = () => setOpenModal(true);
     const handleModalClose = () => setOpenModal(false);
@@ -20,7 +20,14 @@ const Product = ({ product, setOrderSuccess }) => {
                     <Typography variant="h6" gutterBottom component="div">
                         $ {price}
                     </Typography>
-                    <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', mt: 2, px: 3 }} onClick={handleModalOpen}>Buy Now</Button>
+                    <Typography variant="body1" gutterBottom component="div">
+                        Available - {stock} <small>Pcs</small>
+                    </Typography>
+                    {
+                        stock === 0 ?
+                        <Typography variant="h6" sx={{ color: '#282c34', fontWeight: 'bold', mt: 2, pt: 1.1 }}>Out of Stock</Typography> :
+                        <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', mt: 2, px: 3 }} onClick={handleModalOpen}>Buy Now</Button>
+                    }
                 </Paper>
             </Grid>
 

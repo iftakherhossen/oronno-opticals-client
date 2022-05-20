@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 
 const ManageAllOrders = () => {
     const [order, setOrder] = useState([]);
+    const date = new Date();
+    const today = date.getDate();
 
     useEffect(() => {
         fetch('https://boiling-spire-70151.herokuapp.com/orders')
@@ -110,40 +112,40 @@ const ManageAllOrders = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {order.map((order) => (
+                        {order.map(({ _id, date, name, email, address, title, quantity, paymentStatus, status }) => (
                             <TableRow
-                                key={order._id}
+                                key={_id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    {order.date}
+                                    {date}
                                 </TableCell>
                                 <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    {order.name}
+                                    {name}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    <a href={`${order.email}`}><EmailIcon /></a>
+                                    <a href={`${email}`}><EmailIcon /></a>
                                 </TableCell>
                                 <TableCell sx={{ fontWeight: 'bold', fontSize: 16, textTransform: 'capitalize' }}>
-                                    {order.address}
+                                    {address}
                                 </TableCell>
                                 <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    {order.title}
+                                    {title}
                                 </TableCell>
                                 <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    {order._id}
+                                    {_id}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    {order.quantity}
+                                    {quantity}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    {order.paymentStatus === true ? 'Paid' : 'Not Paid'}
+                                    {paymentStatus === true ? 'Paid' : 'Not Paid'}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    {order.status ? <Button disabled sx={{bgcolor: '#eee'}}>Done</Button> : <Button onClick={() => handleDone(order._id)}>Done</Button>}
+                                    {status || ((date.slice(0, 2) * 1 + 7) <= (today * 1)) ? <Button disabled sx={{bgcolor: '#eee'}}>Done</Button> : <Button onClick={() => handleDone(order._id)}>Done</Button>}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    {order.status ? <Button disabled sx={{bgcolor: '#eee'}}>Cancel</Button> : <Button onClick={() => handleCancel(order._id)}>Cancel</Button>}
+                                    {status || ((date.slice(0, 2) * 1 + 3) <= (today * 1)) ? <Button disabled sx={{bgcolor: '#eee', color: '#eee', cursor: 'not-allowed'}}>Cancel</Button> : <Button onClick={() => handleCancel(order._id)}>Cancel</Button>}
                                 </TableCell>
                             </TableRow>
                         ))}

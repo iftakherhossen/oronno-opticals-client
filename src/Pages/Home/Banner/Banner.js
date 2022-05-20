@@ -3,10 +3,11 @@ import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { Box } from '@mui/material';
 
 const Banner = () => {
     return (
-        <div>
+        <Box sx={{mt: 5}}>
             <Carousel fade>
                 <Carousel.Item>
                     <img
@@ -56,7 +57,7 @@ const Banner = () => {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-        </div>
+        </Box>
     );
 };
 

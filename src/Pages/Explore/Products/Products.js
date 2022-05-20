@@ -16,7 +16,7 @@ const Products = () => {
     return (
         <Box>
             <Container>
-                <Box sx={{ textAlign: 'center', py: 3 }}>
+                <Box sx={{ textAlign: 'center', py: 3, mt: 8 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 3 }}>
                         <Box sx={{ textAlign: 'left' }}>
                             <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1 }}>Explore</Typography>
