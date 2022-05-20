@@ -21,7 +21,7 @@ const Product = ({ product, setOrderSuccess }) => {
                         $ {price}
                     </Typography>
                     <Typography variant="body1" gutterBottom component="div">
-                        Available - {stock} <small>Pcs</small>
+                        {stock <= 10 ? <span style={{color: 'red'}}>Available - {stock} <small>Pcs</small></span> : <span>Available - {stock} <small>Pcs</small></span>}
                     </Typography>
                     {
                         stock === 0 ?
@@ -36,7 +36,7 @@ const Product = ({ product, setOrderSuccess }) => {
                 openModal={openModal}
                 handleModalClose={handleModalClose}
                 setOrderSuccess={setOrderSuccess}
-            ></BookingModal>
+            />
         </Box>
     );
 };

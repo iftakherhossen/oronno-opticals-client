@@ -14,12 +14,22 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import SearchModal from "../SearchModal/SearchModal";
+import ProfileModal from "../ProfileModal/ProfileModal";
 
 const Navigation = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const { user, logOut } = useAuth();
+  const [openSearchModal, setOpenSearchModal] = React.useState(false);
+  const [openProfileModal, setOpenProfileModal] = React.useState(false);
+  const [products, setProducts] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch('https://boiling-spire-70151.herokuapp.com/products')
+        .then(res => res.json())
+        .then(data => setProducts(data));
+  }, []); 
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -28,150 +38,169 @@ const Navigation = () => {
     setAnchorElNav(null);
   };
 
+  const handleOpenSearchModal = () => setOpenSearchModal(true);
+  const handleCloseSearchModal = () => setOpenSearchModal(false);
+  const handleOpenProfileModal = () => setOpenProfileModal(true);
+  const handleCloseProfileModal = () => setOpenProfileModal(false);
+
   return (
-    <AppBar position="fixed" className="customBgColor text-white">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontWeight: 600,
-              fontSize: "1.7rem",
-              letterSpacing: ".1rem",
-              color: "white",
-              textDecoration: "none",
-            }}
-            className="name"
-          >
-            Oronno Opticals
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              color="inherit"
-              onClick={handleOpenNavMenu}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+    <>
+      <AppBar position="fixed" className="customBgColor text-white">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href="/"
               sx={{
-                display: { xs: "block", md: "none" },
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontWeight: 600,
+                fontSize: "1.7rem",
+                letterSpacing: ".1rem",
+                color: "white",
+                textDecoration: "none",
+              }}
+              className="name"
+            >
+              Oronno Opticals
+            </Typography>
+
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+                onClick={handleOpenNavMenu}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+              >
+                <MenuItem>
+                  <Link to="/" style={{ textDecoration: "none" }}>
+                    Home
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link to="/explore" style={{ textDecoration: "none" }}>
+                    Explore
+                  </Link>
+                </MenuItem>
+                {user && <MenuItem>
+                  <Link to="/dashboard" style={{ textDecoration: "none" }}>
+                    Dashboard
+                  </Link>
+                </MenuItem>}
+                <MenuItem>
+                  <Link to="/dashboard" style={{ textDecoration: "none" }}>
+                    Contact
+                  </Link>
+                </MenuItem>
+              </Menu>
+            </Box>
+
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                fontWeight: 600,
+                fontSize: "1.7rem",
+                letterSpacing: ".1rem",
+                color: "white",
+                textDecoration: "none",
+              }}
+              className="name"
+            >
+              Oronno Opticals
+            </Typography>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              <MenuItem>
-                <Link to="/" style={{ textDecoration: "none" }}>
-                  Home
-                </Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/explore" style={{ textDecoration: "none" }}>
-                  Explore
-                </Link>
-              </MenuItem>
-              <MenuItem>
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <Button className="navBtn">Home</Button>
+              </Link>
+              <Link to="/explore" style={{ textDecoration: "none" }}>
+                <Button className="navBtn">Explore</Button>
+              </Link>
+              {user && (
                 <Link to="/dashboard" style={{ textDecoration: "none" }}>
-                  Dashboard
+                  <Button className="navBtn">Dashboard</Button>
                 </Link>
-              </MenuItem>
-            </Menu>
-          </Box>
+              )}
+              <Link to="/contact" style={{ textDecoration: "none" }}>
+                <Button className="navBtn">Contact</Button>
+              </Link>
+            </Box>
 
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              fontWeight: 600,
-              fontSize: "1.7rem",
-              letterSpacing: ".1rem",
-              color: "white",
-              textDecoration: "none",
-            }}
-            className="name"
-          >
-            Oronno Opticals
-          </Typography>
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", md: "flex" },
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Link to="/" style={{textDecoration: 'none'}}>
-              <Button className="navBtn">Home</Button>
-            </Link>
-            <Link to="/explore" style={{textDecoration: 'none'}}>
-              <Button className="navBtn">Explore</Button>
-            </Link>
-            <Link to="/dashboard" style={{textDecoration: 'none'}}>
-              <Button className="navBtn">Dashboard</Button>
-            </Link>
-          </Box>
-
-          <Box sx={{ display: "flex", alignItems: "space-between", mr: 6 }}>
-            <form>
-              <TextField
-                id="standard-search"
-                variant="standard"
-                placeholder="Search Opticals"
-                sx={{ color: "white", mr: 1 }}
-                type="search"
-                size="small"
-              />
-              <IconButton>
-                <SearchIcon sx={{ color: "white" }} />
-              </IconButton>
-            </form>
-          </Box>
-
-          {user.displayName ? (
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title={user.displayName}>
-                <IconButton sx={{ p: 0 }}>
-                  <Avatar alt={user.displayName} src={user.photoURL} />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Log Out">
-                <IconButton sx={{ ml: 1.5 }} onClick={logOut}>
-                  <LogoutIcon sx={{ color: "white" }} />
+            <Box sx={{ display: "flex", alignItems: "space-between", mr: 6 }}>
+              <Tooltip title="Search Products">
+                <IconButton onClick={handleOpenSearchModal}>
+                  <SearchIcon sx={{ color: "white", fontSize: 28 }} />
                 </IconButton>
               </Tooltip>
             </Box>
-          ) : (
-            <Button href="/login" className="navBtn">
-              Login
-            </Button>
-          )}
-        </Toolbar>
-      </Container>
-    </AppBar>
+
+            {user.displayName ? (
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title={user.displayName}>
+                  <IconButton sx={{ p: 0 }} onClick={handleOpenProfileModal}>
+                    <Avatar alt={user.displayName} src={user.photoURL} />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Log Out">
+                  <IconButton sx={{ ml: 1.5 }} onClick={logOut}>
+                    <LogoutIcon sx={{ color: "white" }} />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            ) : (
+              <Button href="/login" className="navBtn">
+                Login
+              </Button>
+            )}
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      <SearchModal
+        openSearchModal={openSearchModal}
+        handleCloseSearchModal={handleCloseSearchModal}
+        products={products}
+      />
+      <ProfileModal
+        openProfileModal={openProfileModal}
+        handleCloseProfileModal={handleCloseProfileModal}
+      />
+    </>
   );
 };
 

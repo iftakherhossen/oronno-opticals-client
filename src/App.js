@@ -13,6 +13,7 @@ import AuthProvider from './context/AuthProvider/AuthProvider';
 import Explore from './Pages/Explore/Explore/Explore';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
+import Contact from './Pages/Contact/Contact';
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
             </PrivateRoute>
             <PrivateRoute path="/dashboard">
               <Dashboard />
+            </PrivateRoute>
+            <PrivateRoute path="/contact">
+              <Contact />
             </PrivateRoute>
             <Route path="*">
               <NotFound />

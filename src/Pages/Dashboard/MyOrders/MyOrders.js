@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
-import EmailIcon from "@mui/icons-material/Email";
 import Swal from "sweetalert2";
 
 const MyOrders = () => {

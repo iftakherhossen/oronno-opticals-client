@@ -1,6 +1,7 @@
 import { Container, Button, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import HomeProduct from '../HomeProduct/HomeProduct';
 
@@ -27,11 +28,13 @@ const HomeProducts = () => {
 
     const shuffledProducts = shuffleArray(product);
 
+    orderSuccess && toast.success('Order Placed Successfully!')
+
     return (
         <Box>
             <Container>
-                <Box sx={{ flexGrow: 1, py: 6, textAlign: 'center' }}>
-                    <Typography variant="h4" sx={{ mt: 2, mb: 3, fontWeight: 600 }}>Need Sunglasses or Opticals, We are here to serve you!</Typography>
+                <Box sx={{ flexGrow: 1, pb: 6, textAlign: 'center' }}>
+                    <Typography variant="h3" sx={{ mb: 6, fontWeight: 600 }}>Featured Products</Typography>
                     <Grid container spacing={{ xs: 2, sm: 3, md: 3 }} sx={{ pl: 1.5, pt: 2 }}>
                         {
                             shuffledProducts.slice(0, 6).map(product => <HomeProduct

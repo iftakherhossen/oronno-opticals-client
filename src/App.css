@@ -59,3 +59,18 @@
 #standard-search {
   color: white !important;
 }
+
+.imgBox {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.imgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#contactBg {
+  background-image: url('https://i.ibb.co/nC4TtDj/contact-bg.jpg') !important;
+}

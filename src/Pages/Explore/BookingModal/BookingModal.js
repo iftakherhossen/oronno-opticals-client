@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
-import { Box, Button, FormControl, Input, InputAdornment, InputLabel, Typography } from '@mui/material';
+import { Box, Button, FormControl, Input, InputAdornment, Typography } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import TextField from '@mui/material/TextField';
@@ -19,7 +19,7 @@ const style = {
     textAlign: 'center'
 };
 
-const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess }) => {
+const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess, discountedPrice }) => {
     const { title, price } = product;
     const { user } = useAuth();
 
@@ -152,7 +152,7 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess })
                                 <FormControl variant="standard">
                                     <Input
                                         id="standard-adornment-amount"
-                                        value={price}
+                                        value={discountedPrice ? discountedPrice : price}
                                         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                         startAdornment={<InputAdornment position="start">$</InputAdornment>}
                                         endAdornment={<InputAdornment position="end">x1</InputAdornment>}

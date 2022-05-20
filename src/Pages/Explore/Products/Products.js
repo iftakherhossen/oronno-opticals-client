@@ -1,6 +1,7 @@
-import { Container, Typography, Grid, Divider } from '@mui/material';
+import { Container, Typography, Grid, Divider, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import Product from '../Product/Product';
 
 const Products = () => {
@@ -11,7 +12,9 @@ const Products = () => {
         fetch('https://boiling-spire-70151.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProduct(data));
-    }, [])
+    }, []); 
+    
+    orderSuccess && toast.success('Order Placed Successfully!')
 
     return (
         <Box>
@@ -19,8 +22,8 @@ const Products = () => {
                 <Box sx={{ textAlign: 'center', py: 3, mt: 8 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 3 }}>
                         <Box sx={{ textAlign: 'left' }}>
-                            <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1 }}>Explore</Typography>
-                            <Typography variant="h6" sx={{ mb: 1 }}>Brand New Optical's & Sunglasses</Typography>
+                            <Typography variant="h4" sx={{ fontWeight: 'bold' }}>Explore</Typography>
+                            <Typography variant="h6" sx={{ mb: 2 }}>Brand New Optical's & Sunglasses</Typography>
                         </Box>
                     </Box>
                     <Divider />
@@ -34,9 +37,10 @@ const Products = () => {
                                 />)
                             }
                         </Grid>
-                        <Divider />
+                        <Toolbar />
+                        <Divider />                        
                         <Box sx={{ mx: 'auto', my: 4 }}>
-                            <Typography variant="h6" sx={{ color: '#282c34' }}>More Coming Soon!!!</Typography>
+                            <Typography variant="h5" sx={{ color: '#282c34' }}>More Coming Soon!!!</Typography>
                         </Box>
                     </Box>
                 </Box>
