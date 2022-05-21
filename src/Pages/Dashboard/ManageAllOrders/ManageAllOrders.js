@@ -136,7 +136,7 @@ const ManageAllOrders = () => {
                                     {_id}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    {quantity}
+                                    {quantity ? quantity : 1}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                     {paymentStatus === true ? 'Paid' : 'Not Paid'}

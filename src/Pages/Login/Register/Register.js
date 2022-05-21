@@ -70,7 +70,9 @@ const Register = () => {
                                 <Button variant="contained" sx={{ mt: 5 }} type="submit" className="customBgColor">Register</Button>
                                 <NavLink to="/login" style={{ textDecoration: 'none' }}><Typography sx={{ mt: 2 }} className="customColor"> Already Registered? Login Here</Typography></NavLink>
                             </form>}
-                            {isLoading && <CircularProgress />}
+                            {isLoading && <Box sx={{ display: 'flex' }}>
+                                {isLoading &&  <CircularProgress color="inherit" />}
+                            </Box>}
                             {user?.email && <Alert severity="success" sx={{ mt: 3, width: '100%', mx: 'auto', fontWeight: 'bold' }}>User Created Successfully!</Alert>}
                             {authError && <Alert severity="error" sx={{ mt: 3, width: '100%', mx: 'auto', fontWeight: 'bold' }}>{authError}</Alert>}
                         </Box>

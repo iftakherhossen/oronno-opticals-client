@@ -23,7 +23,7 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess, d
     const { title, price } = product;
     const { user } = useAuth();
 
-    const initialInfo = { name: user.displayName, email: user.email }
+    const initialInfo = { name: user.displayName, email: user.email };
     const [orderInfo, setOrderInfo] = useState(initialInfo);
     const today = new Date();
     const date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();

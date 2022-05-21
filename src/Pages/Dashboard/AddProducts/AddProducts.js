@@ -80,7 +80,9 @@ const AddProducts = () => {
                                 </form>}
                             </Box>
                             <Box>
-                                {isLoading && <CircularProgress />}
+                                {isLoading && <Box sx={{ display: 'flex' }}>
+                                    {isLoading &&  <CircularProgress color="inherit" />}
+                                </Box>}
                                 {addProductSuccess && <Alert severity="success" sx={{ my: 3, width: '100%', mx: 'auto', fontWeight: 'bold' }}>Product Added Successfully!</Alert>}
                             </Box>
                             {addProductSuccess && <Box sx={{ textAlign: 'center', mb: 0 }}>

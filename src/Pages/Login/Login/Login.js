@@ -52,7 +52,9 @@ const Login = () => {
 
                             {user?.email && <Alert severity="success" sx={{ mt: 3, width: '100%', mx: 'auto', fontWeight: 'bold', textAlign: 'center' }}>Welcome, User</Alert>}
                             {authError && <Alert severity="error" sx={{ mt: 3, width: '100%', mx: 'auto', fontWeight: 'bold', textAlign: 'center' }}>{authError}</Alert>}
-                            {isLoading && <CircularProgress />}
+                            {isLoading && <Box sx={{ display: 'flex' }}>
+                                {isLoading &&  <CircularProgress color="inherit" />}
+                            </Box>}
                         </form>
                     </Grid>
                 </Grid>
