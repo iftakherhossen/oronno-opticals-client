@@ -22,7 +22,7 @@ const ShowReviews = () => {
                          </Box>
                          <Box>
                               <Grid container spacing={{ xs: 0, md: 0 }}>
-                                   <Carousel itemsToShow={1} itemsToScroll={1} showArrows={false} autoPlaySpeed={1500}>
+                                   <Carousel itemsToShow={1} itemsToScroll={1} showArrows={false} autoPlaySpeed={1000} style={{ cursor: 'grab'}}>
                                         {
                                              reviews.map(reviews => <ShowReview
                                                   key={reviews._id}

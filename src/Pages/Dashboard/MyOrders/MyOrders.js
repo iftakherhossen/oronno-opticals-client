@@ -85,6 +85,7 @@ const MyOrders = () => {
                 <TableCell align="center">Title</TableCell>
                 <TableCell align="center">Order Id</TableCell>
                 <TableCell align="center">Quantity</TableCell>
+                <TableCell align="center">Price</TableCell>
                 <TableCell align="center">Status</TableCell>
                 <TableCell align="center">Payment</TableCell>
                 <TableCell align="center">Action</TableCell>
@@ -95,13 +96,12 @@ const MyOrders = () => {
                 ({
                   _id,
                   date,
-                  name,
-                  email,
-                  address,
                   title,
+                  price,
                   quantity,
-                  paymentStatus,
+                  totalPrice,
                   status,
+                  paymentMethod
                 }) => (
                   <TableRow
                     key={_id}
@@ -130,21 +130,25 @@ const MyOrders = () => {
                       align="center"
                       sx={{ fontWeight: "bold", fontSize: 16 }}
                     >
-                      {quantity ? quantity : 1}
+                      {quantity} x ${price}
                     </TableCell>
                     <TableCell
                       align="center"
                       sx={{ fontWeight: "bold", fontSize: 16 }}
                     >
-                      {status || date.slice(0, 2) * 1 + 7 <= today * 1
-                        ? "Done"
-                        : "Pending"}
+                      ${totalPrice}
                     </TableCell>
                     <TableCell
                       align="center"
                       sx={{ fontWeight: "bold", fontSize: 16 }}
                     >
-                      {paymentStatus === true ? "Paid" : "Not Paid"}
+                      {status || date.slice(0, 2) * 1 + 7 <= today * 1 ? "Done" : "Pending"}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{ fontWeight: "bold", fontSize: 16 }}
+                    >
+                      {paymentMethod}
                     </TableCell>
                     <TableCell align="center">
                       <Box
@@ -166,6 +170,7 @@ const MyOrders = () => {
                             Cancel
                           </Button>
                         )}
+                        {paymentMethod === 'Cash on Delivery' || <Button>Pay</Button>}
                         {status || date.slice(0, 2) * 1 + 7 <= today * 1 ? (
                           <Tooltip title="It's dummy">
                             <Button

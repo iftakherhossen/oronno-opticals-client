@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper, Button, Tooltip } from '@mui/material';
+import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper, Button, Tooltip, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -55,7 +55,7 @@ const ManageProducts = () => {
 
     return (
         <div>
-            <h2>Manage Products</h2>
+            <Typography variant="h4" sx={{ fontWeight: 600, mb: 2 }}>Manage Products - {products.length}</Typography>
 
             <TableContainer component={Paper}>
                 <Table sx={{ width: '100%' }} aria-label="simple table">
@@ -93,7 +93,7 @@ const ManageProducts = () => {
             </TableContainer>
 
             <Box sx={{ textAlign: 'center', pt: 5 }}>
-                <Link to="/dashboard/addProducts" className="text-decoration-none text-white"><Button variant="contained" className="customBgColor">Add Products</Button></Link>
+                <Link to="/dashboard/add-new-products" className="text-decoration-none text-white"><Button variant="contained" className="customBgColor">Add Products</Button></Link>
             </Box>
         </div>
     );

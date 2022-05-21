@@ -73,13 +73,13 @@ const Review = () => {
                <Box>
                     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 12, sm: 12, md: 15, lg: 20 }} sx={{ height: '80vh', display: 'flex', alignItems: 'center' }}>
                          <Grid item xs={12} sm={10} md={7} lg={5} sx={{ ml: 'auto', mr: {xs: 'auto', md: 1} }}>
-                              <Box sx={{ height: '100%', display: 'flex', alignItems: 'center' }}>
-                                   <Box sx={{  }}>
+                              <Box sx={{ height: '100%', display: 'flex', alignItems: 'baseline', justifyContent: 'center', mb: {md: 15} }}>
+                                   <Box>
                                         <img src="https://i.ibb.co/HFSrx7p/write.png" alt="Review Poster" draggable="false" style={{ display: 'flex', alignItems: 'center' }} />
                                    </Box>
                               </Box>
                          </Grid>
-                         <Grid item xs={12} sm={10} md={7} lg={5} sx={{ mr:  'auto', ml: {xs: 'auto', md: 1} }}>
+                         <Grid item xs={12} sm={10} md={7} lg={7} sx={{ mr:  'auto', ml: {xs: 'auto', md: 1} }}>
                               <Box sx={{ height: '100%', display: 'flex', alignItems: 'center'}}>
                                    {!isLoading && <form onSubmit={handleSubmit}>
                                         <TextField

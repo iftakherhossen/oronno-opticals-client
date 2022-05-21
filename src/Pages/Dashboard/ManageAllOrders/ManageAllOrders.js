@@ -1,7 +1,8 @@
-import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper, Button, Typography } from '@mui/material';
+import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper, Button, Typography, Tooltip } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import { Box } from '@mui/system';
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import Swal from 'sweetalert2';
 
 const ManageAllOrders = () => {
@@ -93,26 +94,28 @@ const ManageAllOrders = () => {
 
     return (
         <Box>
-            <Typography variant="h4" sx={{ mb: 2 }}>Manage All Orders - {order.length}</Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Typography variant="h4" sx={{ mb: 2, fontWeight: 600 }}>Manage All Orders - {order.length}</Typography>                
+            </Box>
 
             <TableContainer component={Paper}>
                 <Table sx={{ width: '100%' }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Date</TableCell>
-                            <TableCell>Name</TableCell>
-                            <TableCell align="center">Email</TableCell>
-                            <TableCell>Address</TableCell>
-                            <TableCell>Product</TableCell>
-                            <TableCell>Order Id</TableCell>
+                            <TableCell align="center">Name</TableCell>
+                            <TableCell align="center">Contact</TableCell>
+                            <TableCell align="center">Product</TableCell>
+                            <TableCell align="center">Order Id</TableCell>
                             <TableCell align="center">Quantity</TableCell>
+                            <TableCell align="center">Total</TableCell>
                             <TableCell align="center">Payment Status</TableCell>
                             <TableCell align="center">Status</TableCell>
                             <TableCell align="center">Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {order.map(({ _id, date, name, email, address, title, quantity, paymentStatus, status }) => (
+                        {order.map(({ _id, date, name, email, address, title, quantity, paymentStatus, price, totalPrice, status }) => (
                             <TableRow
                                 key={_id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -120,32 +123,35 @@ const ManageAllOrders = () => {
                                 <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                     {date}
                                 </TableCell>
-                                <TableCell component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                <TableCell  align="center" component="th" scope="row" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                     {name}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    <a href={`${email}`}><EmailIcon /></a>
+                                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        <span><a href={`${email}`}><EmailIcon /></a></span>
+                                        <span><Tooltip title={address}><FmdGoodIcon /></Tooltip></span>
+                                    </Box>
                                 </TableCell>
-                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16, textTransform: 'capitalize' }}>
-                                    {address}
-                                </TableCell>
-                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                     {title}
                                 </TableCell>
-                                <TableCell sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                <TableCell  align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                     {_id}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    {quantity ? quantity : 1}
+                                    {quantity} x ${price}
+                                </TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
+                                    ${totalPrice}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
                                     {paymentStatus === true ? 'Paid' : 'Not Paid'}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    {status || ((date.slice(0, 2) * 1 + 7) <= (today * 1)) ? <Button disabled sx={{bgcolor: '#eee'}}>Done</Button> : <Button onClick={() => handleDone(order._id)}>Done</Button>}
+                                    {status || ((date.slice(0, 2) * 1 + 7) <= (today * 1)) ? <Button disabled sx={{bgcolor: '#eee'}}>Done</Button> : <Button onClick={() => handleDone(_id)}>Done</Button>}
                                 </TableCell>
                                 <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 16 }}>
-                                    {status || ((date.slice(0, 2) * 1 + 3) <= (today * 1)) ? <Button disabled sx={{bgcolor: '#eee', color: '#eee', cursor: 'not-allowed'}}>Cancel</Button> : <Button onClick={() => handleCancel(order._id)}>Cancel</Button>}
+                                    {status || ((date.slice(0, 2) * 1 + 3) <= (today * 1)) ? <Button disabled sx={{bgcolor: '#eee', color: '#eee', cursor: 'not-allowed'}}>Cancel</Button> : <Button onClick={() => handleCancel(_id)}>Cancel</Button>}
                                 </TableCell>
                             </TableRow>
                         ))}

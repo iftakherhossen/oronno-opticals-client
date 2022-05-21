@@ -14,7 +14,7 @@ const SaleProducts = () => {
      }, []);
     
      const shuffleArray = array => {
-          let i = array.length - 1;
+          let i = array.length - 13;
           for (; i > 0; i--) {
                const j = Math.floor(Math.random() * (i + 1));
                const temp = array[i];

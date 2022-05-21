@@ -30,7 +30,7 @@ const Products = () => {
                     <Box sx={{ flexGrow: 1, pt: 5 }}>
                         <Grid container spacing={{ xs: 2, sm: 3, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} sx={{ pl: 5.6 }}>
                             {
-                                product.map(product => <Product
+                                product.slice(0, 12).map(product => <Product
                                     key={product._id}
                                     product={product}
                                     setOrderSuccess={setOrderSuccess}

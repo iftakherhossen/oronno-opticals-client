@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
-import { Box, Button, FormControl, Input, InputAdornment, Typography } from '@mui/material';
+import { Box, Button, FormControl, Input, InputAdornment, InputLabel, MenuItem, Select, Tooltip, Typography } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import TextField from '@mui/material/TextField';
@@ -22,7 +22,6 @@ const style = {
 const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess, discountedPrice }) => {
     const { title, price } = product;
     const { user } = useAuth();
-
     const initialInfo = { name: user.displayName, email: user.email };
     const [orderInfo, setOrderInfo] = useState(initialInfo);
     const today = new Date();
@@ -36,11 +35,16 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess, d
         setOrderInfo(newInfo);
     }
     const handleSubmit = e => {
+        const deliveryCharge = 30;
+        const totalPrice = (price * orderInfo.quantity) + deliveryCharge;
+    
         // collect data
         const order = {
             ...orderInfo,
             title,
             price,
+            totalPrice,
+            deliveryCharge,
             date
         }
 
@@ -61,7 +65,7 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess, d
                         'Order Placed!',
                         'Order has been placed successfully! Wait for the confirmation email.',
                         'success'
-                      )
+                    )
                 }
             });
 
@@ -124,29 +128,33 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess, d
                                     sx={{ my: 2, width: '48%' }}
                                     required
                                 />
-                                <TextField
-                                    id="standard-size-option"
-                                    defaultValue="Cash on Delivery"
-                                    variant="standard"
-                                    name="paymentMethod"
-                                    title="Payment Method"
-                                    label="Payment Method"
-                                    onBlur={handleOnBlur}
-                                    sx={{ my: 2, width: '47%' }}
-                                    readOnly
-                                />
+                                <FormControl variant="standard" sx={{ my: 2, width: '47%', textAlign: 'left' }}>
+                                    <InputLabel id="demo-simple-select-standard-label">Payment Method</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-standard-label"
+                                        id="demo-simple-select-standard"
+                                        onBlur={handleOnBlur}
+                                        label="Payment Method"
+                                        name="paymentMethod"
+                                        title="Payment Method"
+                                        required
+                                    >
+                                        <MenuItem value="Cash on Delivery">Cash on Delivery</MenuItem>
+                                        <MenuItem value="Online Payment">Online Payment</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Box>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <FormControl variant="standard">
                                     <Input
                                         id="standard-adornment-amount"
-                                        defaultValue="1"
                                         type="number"
                                         name="quantity"
                                         startAdornment={<InputAdornment position="start">Quantity</InputAdornment>}
                                         onBlur={handleOnBlur}
                                         title="Quantity"
                                         sx={{ my: 2, width: '91%' }}
+                                        required
                                     />
                                 </FormControl>
                                 <FormControl variant="standard">
@@ -172,6 +180,7 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess, d
                                 sx={{ my: 2, width: '100%' }}
                                 required
                             />
+                            <Typography variant='subtitle1' sx={{ color: '#FE6766' }}>N:B: Delivery Charge: <strong>$30</strong> will be applied!</Typography>
                             <Button variant="contained" type="submit" sx={{ fontWeight: 'bold', mt: 2 }} className="customBgColor">Submit</Button>
                         </form>
                     </Box>

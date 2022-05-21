@@ -1,15 +1,16 @@
-import { Container, Grid, TextField, Typography, Button, Alert, CircularProgress } from '@mui/material';
+import { Grid, TextField, Typography, Button, CircularProgress, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
+import GoogleButton from 'react-google-button';
+import toast from 'react-hot-toast';
 import { NavLink, useLocation, useHistory } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
-    const { user, loginUser, isLoading, authError } = useAuth();
+    const { user, loginUser, isLoading, success, authError, signInWithGoogle } = useAuth();
 
     const location = useLocation();
-    const history = useHistory();
 
     const handleOnBlur = e => {
         const field = e.target.name;
@@ -19,46 +20,71 @@ const Login = () => {
         setLoginData(newLoginData);
     }
     const handleLogin = e => {
-        loginUser(loginData.email, loginData.password, location, history)
+        loginUser(loginData.email, loginData.password, location);
         e.preventDefault();
     }
 
-    return (
-        <Box sx={{backgroundImage: 'url(https://i.ibb.co/C60Qdd8/login-bg.jpg)'}}>
-            <Container>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} md={4} sx={{ mx: 'auto' }}>
-                        <form onSubmit={handleLogin} style={{ padding: '95px 0', textAlign: 'center' }}>
-                            <Typography variant="h5" sx={{ mb: 3 }} className="customColor">Login</Typography>
-                            <TextField
-                                id="standard-basic-email"
-                                label="Enter Your Email"
-                                type="email"
-                                name="email"
-                                onBlur={handleOnBlur}
-                                variant="standard"
-                                sx={{ width: '100%', mb: 2 }} /><br />
-                            <TextField
-                                id="standard-basic-password"
-                                type="password"
-                                label="Enter Your Password" variant="standard"
-                                name="password"
-                                onBlur={handleOnBlur}
-                                sx={{ width: '100%', mb: 1 }} /><br />
-                            <Typography variant="body1" sx={{ color: 'red', cursor: 'pointer' }}>Forget Your Password?</Typography>
-                            <br />
-                            <Button variant="contained" sx={{ mt: 7 }} className="customBgColor" type="submit"> Login</Button>
-                            <NavLink to="/register" style={{ textDecoration: 'none' }} className="customColor"><Typography sx={{ mt: 4 }}>New User? Register Now</Typography></NavLink>
+    user.email && success === true && toast.success(`Welcome, ${user.displayName}`);
+    authError && toast.error({authError});
 
-                            {user?.email && <Alert severity="success" sx={{ mt: 3, width: '100%', mx: 'auto', fontWeight: 'bold', textAlign: 'center' }}>Welcome, User</Alert>}
-                            {authError && <Alert severity="error" sx={{ mt: 3, width: '100%', mx: 'auto', fontWeight: 'bold', textAlign: 'center' }}>{authError}</Alert>}
-                            {isLoading && <Box sx={{ display: 'flex' }}>
-                                {isLoading &&  <CircularProgress color="inherit" />}
-                            </Box>}
-                        </form>
+    return (
+        <Box sx={{ backgroundImage: 'url("https://i.ibb.co/C60Qdd8/login-bg.jpg")', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+            <Box sx={{ bgcolor: '#282c34c5', height: '100vh' }}>
+                <Box sx={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <Grid container sx={{ maxWidth: '55%', bgcolor: '#eee', boxShadow: 5, borderRadius: 5 }}>
+                        <Grid item xs={12} md={5} sx={{display: 'flex', justifyContent: { xs: 'center', md: 'flex-end' }, alignItems: 'center'}}>
+                            <Box sx={{ my: 'auto', ps: { md: 5 } }} className="signInImgWrapper">
+                                <img src="https://i.ibb.co/wRtj5wn/signup-image-removebg-preview.png" alt="SignUp" draggable="false" style={{ width: '100%', margin: '35px 0' }} className="signInImg" />
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} md={7} sx={{ my: 5, display: 'flex', flexDirection: 'column', justifyContent: { xs: 'center', md: 'center' }, alignItems: 'center' }}>
+                            <Toolbar />
+                            <Box>
+                                <Box sx={{display: 'flex', justifyContent: 'flex-start'}}>
+                                    <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2, mr: 'auto' }}>Login</Typography>
+                                </Box>
+                                <Box sx={{ height: '100%', maxWidth: '90%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
+                                    {!isLoading && <form onSubmit={handleLogin}>
+                                        <TextField 
+                                            variant='standard'
+                                            label='Email'
+                                            required
+                                            name="email"
+                                            type="email"
+                                            onBlur={handleOnBlur}
+                                            sx={{ width: 1, mb: 2, color: 'white' }}
+                                        />
+                                        <TextField 
+                                            variant='standard'
+                                            label='Password'
+                                            required
+                                            name="password"
+                                            onBlur={handleOnBlur}
+                                            type="password"
+                                            sx={{ width: 1, mb: 1 }}
+                                        />
+                                        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 3 }}>
+                                            <Typography variant="body2" sx={{ color: 'red', cursor: 'pointer' }}>Forget Your Password?</Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                                            <Button type="submit" variant="contained" sx={{ px: 3 }} className="customBgColor" disabled={!loginData}>Login</Button>
+                                        </Box>
+                                    </form>}
+                                    {isLoading && <Box sx={{ display: 'flex' }}>
+                                        <CircularProgress color="inherit" />
+                                    </Box>}
+                                    <NavLink to="/register" style={{ textDecoration: 'none' }} className="customColor"><Typography sx={{ mt: 3, mb: 1, fontSize: 18, fontWeight: 600 }}>New User? Register Now!</Typography></NavLink>
+                                    <GoogleButton
+                                        onClick={signInWithGoogle}
+                                        disabled={user.email}
+                                    />
+                                </Box>
+                            </Box>
+                            <Toolbar />                            
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Container>
+                </Box>
+            </Box>            
         </Box>
     );
 };
