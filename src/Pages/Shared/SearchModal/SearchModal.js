@@ -1,4 +1,4 @@
-import { Backdrop, Fade, Grid, Modal, Toolbar } from "@mui/material";
+import { Backdrop, Fade, Grid, Modal, Toolbar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from 'react';
 import SearchBar from "material-ui-search-bar";
@@ -20,12 +20,19 @@ const style = {
 const SearchModal = ({ products, openSearchModal, handleCloseSearchModal }) => {
      const [items, setItems] = useState(products);
      const [search, setSearch] = useState('');
+     const [orderSuccess, setOrderSuccess] = useState(false);
+     const [notFound, setNotFound] = useState(false);
 
      const requestSearch = (searchedValue) => {
           const filteredItems = products.filter((item) => {
                return item.title.toLowerCase().includes(searchedValue.toLowerCase());               
           });
           setItems(filteredItems);
+
+          const notFoundItems = products.filter((item) => {
+               return searchedValue.toLowerCase() !== item.title.toLowerCase();
+          });
+          if (notFoundItems.length === 0) setNotFound(true);
      };
 
      const cancelSearch = () => {
@@ -69,6 +76,7 @@ const SearchModal = ({ products, openSearchModal, handleCloseSearchModal }) => {
                                              onCancelSearch={() => cancelSearch()}
                                              placeholder="Search Products..."
                                              style={{ borderRadius: 10 }}
+                                             autoFocus
                                         />                                     
                                    </form> 
                               </Box>
@@ -78,11 +86,22 @@ const SearchModal = ({ products, openSearchModal, handleCloseSearchModal }) => {
                                         {
                                              search === '' ? shuffledItems.slice(0, 4).map((item) => <SingleItem 
                                                   key={item._id}
-                                                  item={item}                                         
+                                                  item={item}
+                                                  setOrderSuccess={setOrderSuccess}
+                                                  handleCloseSearchModal={handleCloseSearchModal}                                       
                                              />) : items.map((item) => <SingleItem 
                                                   key={item._id}
                                                   item={item}
+                                                  setOrderSuccess={setOrderSuccess}
+                                                  handleCloseSearchModal={handleCloseSearchModal}
                                              />)
+                                        }
+                                        {
+                                             notFound === true && <Grid item xs={12} sm={12} md={12} sx={{ py: 2 }}>
+                                                  <Box sx={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                       <img src="https://i.ibb.co/mhF0cFV/notFound.png" alt="Search Result Not Found!" style={{ width: '250px', height: '250px' }} />
+                                                  </Box>
+                                             </Grid>
                                         }
                                    </Grid>
                               </Box>

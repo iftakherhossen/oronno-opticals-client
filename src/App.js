@@ -29,10 +29,10 @@ function App() {
       <AuthProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<Home animate={true} />} />
+            <Route path="/home" element={<Home animate={true} />} />
+            <Route path="/login" element={<Login animate={true} />} />
+            <Route path="/register" element={<Register animate={true} />} />
             <Route path="/explore" element={<PrivateRoute><Explore /></PrivateRoute>} />
             <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>}>
               <Route index element={<PrivateRoute><MyOrders /></PrivateRoute>} />

@@ -27,9 +27,6 @@ const Dashboard = props => {
             </Box>
             <List sx={{ minHeight: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Box>
-                    <Link to={'/'} style={{ color: 'white', textDecoration: 'none' }}>
-                        <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>Home</Button>
-                    </Link>
                     <Link to={'/dashboard'} style={{ color: 'white', textDecoration: 'none' }}>
                         <Button color="inherit" sx={{ fontSize: 18, width: '70%', py: 1 }}>My Orders</Button>
                     </Link>

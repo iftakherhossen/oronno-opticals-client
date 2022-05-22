@@ -82,6 +82,10 @@
   cursor: none !important;
 }
 
+.searchCardHover:hover {
+  color: black !important;
+}
+
 @media screen and (min-width: 900px) and (max-width: 1500px) {
   .signInImgWrapper {
     display: flex;

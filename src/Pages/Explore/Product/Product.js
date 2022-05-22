@@ -26,7 +26,7 @@ const Product = ({ product, setOrderSuccess }) => {
                     {
                         stock === 0 ?
                         <Typography variant="h6" sx={{ color: '#282c34', fontWeight: 'bold', mt: 2, pt: 1.1 }}>Out of Stock</Typography> :
-                        <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', mt: 2, px: 3 }} onClick={handleModalOpen}>Buy Now</Button>
+                        <Button variant="contained" sx={{ bgcolor: '#282c34', color: 'white', fontWeight: 'bold', mt: 2, px: 3, mb: 1 }} onClick={handleModalOpen}>Buy Now</Button>
                     }
                 </Paper>
             </Grid>

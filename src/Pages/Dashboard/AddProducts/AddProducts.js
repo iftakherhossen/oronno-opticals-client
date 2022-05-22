@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Box } from '@mui/system';
 import useAuth from '../../../hooks/useAuth';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AddProducts = () => {
     const { isLoading } = useAuth();
@@ -26,6 +27,13 @@ const AddProducts = () => {
                 }
             })
     }
+
+    addProductSuccess && Swal.fire(
+        'Done!',
+        'Product Added Successfully!',
+        'succcess'
+    )
+
     return (
         <Box>
             <Container>
@@ -40,7 +48,7 @@ const AddProducts = () => {
                                         label="Product Name"
                                         {...register("title", { required: true })}
                                         variant="standard"
-                                        sx={{ width: '100%', mb: 2 }}
+                                        sx={{ width: '100%', mb: 1.5 }}
                                         required
                                     />
                                     {errors.tile && <span style={{ color: 'red' }}>Product Name is required</span>}
@@ -48,7 +56,7 @@ const AddProducts = () => {
                                         label="Product Image Link"
                                         {...register("img", { required: true })}
                                         variant="standard"
-                                        sx={{ width: '100%', mb: 2 }}
+                                        sx={{ width: '100%', mb: 1.5 }}
                                         required
                                     />
                                     {errors.img && <span style={{ color: 'red' }}>Product Image is required</span>}
@@ -56,17 +64,25 @@ const AddProducts = () => {
                                         label="Product Price"
                                         {...register("price", { required: true })}
                                         variant="standard"
-                                        sx={{ width: '100%', mb: 2 }}
+                                        sx={{ width: '100%', mb: 1.5 }}
                                         required
                                     />
                                     {errors.price && <span style={{ color: 'red' }}>Product Price is required</span>}
+                                    <TextField
+                                        label="Product Stock"
+                                        {...register("stock", { required: true })}
+                                        variant="standard"
+                                        sx={{ width: '100%', mb: 1.5 }}
+                                        required
+                                    />
+                                    {errors.stock && <span style={{ color: 'red' }}>Product Stock is required</span>}
                                     <TextField
                                         id="standard-multiline-static"
                                         label="Product Description"
                                         multiline
                                         rows={4}
                                         variant="standard"
-                                        sx={{ width: '100%', mb: 2 }}
+                                        sx={{ width: '100%', mb: 1.5 }}
                                         {...register("description", { required: true })}
                                         required
                                     />
@@ -83,7 +99,6 @@ const AddProducts = () => {
                                 {isLoading && <Box sx={{ display: 'flex' }}>
                                     {isLoading &&  <CircularProgress color="inherit" />}
                                 </Box>}
-                                {addProductSuccess && <Alert severity="success" sx={{ my: 3, width: '100%', mx: 'auto', fontWeight: 'bold' }}>Product Added Successfully!</Alert>}
                             </Box>
                             {addProductSuccess && <Box sx={{ textAlign: 'center', mb: 0 }}>
                                 <Link to="/explore" className="text-white text-decoration-none"><Button className="customBgColor text-white">Explore The Products</Button></Link>

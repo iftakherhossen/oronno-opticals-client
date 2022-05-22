@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import GoogleButton from 'react-google-button';
 import toast from 'react-hot-toast';
-import { NavLink, useLocation, useHistory } from 'react-router-dom';
+import { NavLink, useLocation, useHistory, useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
@@ -11,6 +11,7 @@ const Login = () => {
     const { user, loginUser, isLoading, success, authError, signInWithGoogle } = useAuth();
 
     const location = useLocation();
+    let navigate = useNavigate();
 
     const handleOnBlur = e => {
         const field = e.target.name;
@@ -20,7 +21,7 @@ const Login = () => {
         setLoginData(newLoginData);
     }
     const handleLogin = e => {
-        loginUser(loginData.email, loginData.password, location);
+        loginUser(loginData.email, loginData.password, location, navigate);
         e.preventDefault();
     }
 

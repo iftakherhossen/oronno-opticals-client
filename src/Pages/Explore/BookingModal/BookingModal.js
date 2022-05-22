@@ -19,7 +19,7 @@ const style = {
     textAlign: 'center'
 };
 
-const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess, discountedPrice }) => {
+const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess, discountedPrice, handleCloseSearchModal }) => {
     const { title, price } = product;
     const { user } = useAuth();
     const initialInfo = { name: user.displayName, email: user.email };
@@ -60,10 +60,11 @@ const BookingModal = ({ product, openModal, handleModalClose, setOrderSuccess, d
             .then(data => {
                 if (data.insertedId) {
                     setOrderSuccess(true);
+                    handleCloseSearchModal();
                     handleModalClose();
                     Swal.fire(
                         'Order Placed!',
-                        'Order has been placed successfully! Wait for the confirmation email.',
+                        `Order has been placed successfully! Your Total Cost is $${totalPrice}`,
                         'success'
                     )
                 }
